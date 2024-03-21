@@ -45,7 +45,7 @@ public class CuentaDAO {
     @OneToMany(mappedBy="id_trasaciones")
     private List<TransacionDAO> transaciones;
     
-    @OneToMany(mappedBy="movimiento")
+    @OneToMany(mappedBy="id_movimiento")
     private List<MovimientoCuentaDAO> movimientoCuenta;
 
     @OneToMany(mappedBy="id_Credito")
