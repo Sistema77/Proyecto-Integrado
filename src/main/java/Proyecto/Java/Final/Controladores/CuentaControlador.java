@@ -60,7 +60,8 @@ public class CuentaControlador {
 			 
 			 cuentaServicio.crearCuenta(authentication.getName());
 			 
-			 return "cuenta";
+			 //return "cuenta";
+			 return "redirect:/privada/ver-cuenta"; 
 		 }catch(Exception e) {
 			 logger.error("Error en crearCuenta: " + e.getMessage(), e);
 	         return "home";

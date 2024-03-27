@@ -39,10 +39,17 @@
 		</form>
 	</div>
 	
-	<script>
-	  document.addEventListener("DOMContentLoaded", function() {
-		  notificacion("¡Email de confirmación enviado!", "Revise su bandeja de entrada y confirme su cuenta de correo electrónico.", 'info');
-	    });
+	<script th:if="${not #strings.isEmpty(mensajeRegistroExitoso)}">
+		notificacion("¡Email de confirmación enviado!", "Revise su bandeja de entrada y confirme su cuenta de correo electrónico.", 'info');
+	</script>
+	<script th:if="${param.error}">
+		notificacion("¡No se pudo iniciar sesión!","Correo electrónico o contraseña incorrecta", 'error');
+	</script>
+	<script th:if="${not #strings.isEmpty(cuentaVerificada)}">
+		notificacion("¡Error!","Ocurrio un error no esperado, intentelo de nuevo", 'error');
+	</script>
+	<script th:if="${not #strings.isEmpty(error)}">
+		notificacion("¡Error!","Ocurrio un error no esperado, intentelo de nuevo", 'error');
 	</script>
 </body>
 

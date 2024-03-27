@@ -56,6 +56,7 @@ public class AdministradorControlador {
         } catch (Exception e) {
             // Manejo de errores
             logger.error("Error en listadoUsuarios: " + e.getMessage(), e);
+            model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
             return "home"; 
         }
     }
@@ -74,6 +75,7 @@ public class AdministradorControlador {
             if(request.isUserInRole("ROLE_ADMIN") && usuario.getTipoUsuario().equals("ROLE_ADMIN")) {
                 // Si el usuario a eliminar es un administrador, vuelve a cargar la lista de usuarios y muestra la página de administración
                 model.addAttribute("usuarios", usuarios);
+                model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
                 return "administracion";
             }
             
@@ -82,6 +84,7 @@ public class AdministradorControlador {
             return "redirect:/privada/administracion";
         } catch (Exception e) {
             // Manejo de errores
+        	model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
             logger.error("Error en eliminarUsuario: " + e.getMessage(), e);
             return "redirect:/privada/administracion"; 
         }

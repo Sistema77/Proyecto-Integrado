@@ -33,6 +33,7 @@ public class loginRegistroControlador {
             model.addAttribute("usuarioDTO", new UsuarioDTO());
             return "registro";
         } catch (Exception e) {
+        	model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
             logger.error("Error en registrarGet: " + e.getMessage(), e);
             return "registro"; 
         }
@@ -44,10 +45,14 @@ public class loginRegistroControlador {
         try {
             // Agrega un nuevo objeto UsuarioDTO al modelo para vincular con el formulario de inicio de sesión
             model.addAttribute("usuarioDTO", new UsuarioDTO());
+            
             return "login";
         } catch (Exception e) {
-            logger.error("Error en loginGet: " + e.getMessage(), e);
-            return "login"; 
+        	model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
+            
+        	logger.error("Error en loginGet: " + e.getMessage(), e);
+            
+        	return "login"; 
         }
     }
     
@@ -78,6 +83,9 @@ public class loginRegistroControlador {
         } catch (Exception e) {
             // Manejo de errores
             logger.error("Error en registrarPost: " + e.getMessage(), e);
+            
+            model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
+            
             return "registro"; 
         }
     }
@@ -100,11 +108,13 @@ public class loginRegistroControlador {
                 return "home";
             } else {
                 // Si la cuenta no está confirmada, redirige al formulario de inicio de sesión
+            	model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
                 return "login";
             }
         } catch (Exception e) {
             // Manejo de errores
-            logger.error("Error en loginCorrecto: " + e.getMessage(), e);
+        	model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
+        	logger.error("Error en loginCorrecto: " + e.getMessage(), e);
             return "login"; 
         }
     }
