@@ -18,4 +18,8 @@ public interface ICuentaServicio {
 	public List<CuentaDAO> listadoCuentaDAO();
 	
 	public void modificarCuenta(long id, CuentaDTO cuentaModificado);
+	
+	public boolean numeroCuentaExiste(String num);
+	
+	public String crearNumeroCuenta();
 }

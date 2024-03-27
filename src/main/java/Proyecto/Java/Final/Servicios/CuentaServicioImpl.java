@@ -2,6 +2,7 @@ package Proyecto.Java.Final.Servicios;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,15 @@ public class CuentaServicioImpl implements ICuentaServicio{
 	        // Comprueba si ya existe un usuario con el email que quiere registrar
 	        if (usuario != null && usuario.isCuentaConfirmada()) {
 	            CuentaDAO cuenta = new CuentaDAO();
+	            
+	            String NumeroCuenta = crearNumeroCuenta();
+
+	            while(numeroCuentaExiste(NumeroCuenta)) {
+	            	NumeroCuenta = crearNumeroCuenta();
+	            }
+	            
 	            cuenta.setConNomina(false);
-	            cuenta.setNumeroCuenta("ES21 1465 0100 72 2030876293");
+	            cuenta.setNumeroCuenta(NumeroCuenta);
 	            cuenta.setFch_apertura(Calendar.getInstance());
 	            cuenta.setSaldo(0.0);
 	            cuenta.setUsuario(usuario);
@@ -131,10 +139,8 @@ public class CuentaServicioImpl implements ICuentaServicio{
             if (cuenta != null) {
             	
                 // Actualizar los campos de la cuenta existente con los nuevos valores
-            	cuenta.setConNomina(false);
-            	cuenta.setSaldo(cuentaModificado.getSaldo());
-            	cuenta.setUsuario(cuenta.getUsuario());
-            	
+            	cuenta.setConNomina(cuentaModificado.getConNomina());
+	
                 // Guardar los cambios en la base de datos
             	cuentaRepositorio.save(cuenta);
                 logger.info("Cuenta " + cuenta.getNumeroCuenta() +" Fue modificado");
@@ -143,5 +149,51 @@ public class CuentaServicioImpl implements ICuentaServicio{
             logger.error("Error en modificarCuenta: " + e.getMessage(), e);
         }
     }
+    
+    //Comprueba si el Numero de Cuenta Existe en la BD
+    @Override
+    public boolean numeroCuentaExiste(String num) {
+    	List<CuentaDAO> listaCuenta = cuentaRepositorio.findAll();
+    	boolean re = false;
+    	
+    	for(CuentaDAO cuenta : listaCuenta) {
+    		if(cuenta.getNumeroCuenta() == num) {
+    			re = true;
+    		}
+    	}
+    	
+    	return re;
+    }
 
+    // Crea el Numero de Cuenta
+    @Override
+    public String crearNumeroCuenta(){
+    	String nC = "ES21 ";
+    	int numeroAleatorio;
+    	Random rand = new Random();
+    	 
+    	// Saca 4 digitos 2 veces
+    	for(int e = 0; e<2; e++) {
+	    	for(int i = 0; i<4; i++) {
+	    		 numeroAleatorio = rand.nextInt(10);
+	    		nC = nC +  numeroAleatorio;
+	    	}
+	    	nC = nC + " ";
+    	}
+    	
+    	// Saca 2 digitos
+    	for(int i = 0; i<2; i++) {
+	   		numeroAleatorio = rand.nextInt(10);
+	   		nC = nC +  numeroAleatorio;
+    	}
+    	
+    	nC = nC + " ";
+    	
+    	// Saca 10 digitos
+    	for(int i = 0; i<10; i++) {
+	   		numeroAleatorio = rand.nextInt(10);
+	   		nC = nC +  numeroAleatorio;
+    	}
+    	return nC;
+    }
 }
