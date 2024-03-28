@@ -103,10 +103,15 @@ public class CuentaControlador {
 	 
 	    // Método para procesar la solicitud de modificación de Cuenta
 	    @PostMapping("/privada/modificar/cuenta/{id}")
-	    public String modificarCuenta(@PathVariable long id, @ModelAttribute CuentaDTO cuentaModificado) {
+	    public String modificarCuenta(@PathVariable long id, @ModelAttribute CuentaDTO cuentaModificado, Model model) {
 	         try {
 	             // Actualiza los datos del cuenta
-	        	 cuentaServicio.modificarCuenta(id, cuentaModificado);
+	        	 boolean tieneNomina =  cuentaServicio.modificarCuenta(id, cuentaModificado);
+	        	 if(tieneNomina) {
+	        		 model.addAttribute("nominaExistente", "Error al procesar la solicitud. Ya tiene una Cuenta con Nomina Asignada.");
+	        		 return "redirect:/privada/ver-cuenta";
+	        	 }
+	        	 
 	        	 return "redirect:/privada/ver-cuenta"; 
 	         } catch (Exception e) {
 	             // Manejo de errores

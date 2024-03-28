@@ -76,6 +76,11 @@
 	<div th:if="${not #strings.isEmpty(noAdmin)}">
 	    Acceso Restringido, No tiene permisos
 	</div>
+	
+		<script th:if="${not #strings.isEmpty(nominaExistente)}">
+			notificacion("¡Error!","Ya tiene una Cuenta con su Nomina", 'error');
+		</script>
+	
 </body>
 
 </html>

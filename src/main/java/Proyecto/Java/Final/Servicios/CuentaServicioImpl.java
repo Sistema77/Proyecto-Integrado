@@ -132,21 +132,48 @@ public class CuentaServicioImpl implements ICuentaServicio{
     
  // Método para modificar los detalles de una cuenta
     @Override
-    public void modificarCuenta(long id, CuentaDTO cuentaModificado) {
+    public boolean modificarCuenta(long id, CuentaDTO cuentaModificado) {
         try {
             // Verificar si la cuenta con el ID proporcionado existe en la base de datos
             CuentaDAO cuenta = cuentaRepositorio.findById(id);
+            boolean yaTieneNomina = false;
+            
             if (cuenta != null) {
             	
-                // Actualizar los campos de la cuenta existente con los nuevos valores
-            	cuenta.setConNomina(cuentaModificado.getConNomina());
-	
-                // Guardar los cambios en la base de datos
-            	cuentaRepositorio.save(cuenta);
-                logger.info("Cuenta " + cuenta.getNumeroCuenta() +" Fue modificado");
+            	// Compruebo que ninguna cuenta tenga la nomina ya Asingnada
+            	List<CuentaDAO> listaCuenta = cuentaRepositorio.findAll();
+            	for(CuentaDAO cuentaComparar : listaCuenta) {
+            		if(cuentaComparar.getConNomina()) {
+            			if(cuenta.getNumeroCuenta() != cuentaComparar.getNumeroCuenta()) {
+            				yaTieneNomina = true;
+            			}
+            		}
+            	}
+            	
+            	if(!yaTieneNomina) {
+            		// Actualizar los campos de la cuenta existente con los nuevos valores
+            		if(cuentaModificado.getConNomina() == null) {
+            			cuenta.setConNomina(false);
+            		}else {
+            			cuenta.setConNomina(cuentaModificado.getConNomina());
+            		}
+            		
+                	
+                    // Guardar los cambios en la base de datos
+                	cuentaRepositorio.save(cuenta);
+                    logger.info("Cuenta " + cuenta.getNumeroCuenta() +" Fue modificado");
+                    
+                    return false;
+            	}else {
+            		return true;
+            	}
             }
+            
+            return false;
+            
         } catch (Exception e) {
             logger.error("Error en modificarCuenta: " + e.getMessage(), e);
+            return false;
         }
     }
     
