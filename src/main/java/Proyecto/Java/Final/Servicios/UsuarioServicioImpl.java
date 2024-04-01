@@ -140,8 +140,14 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
     public UsuarioDTO buscarUsuarioEmail(String email) {
         try {
             UsuarioDAO usuario = usuarioRepositorio.findByEmail(email);
-            UsuarioDTO usuarioDto = usuarioToDto.usuarioToDto(usuario);
-            return usuarioDto;
+            
+            if(usuario != null) {
+            	UsuarioDTO usuarioDto = usuarioToDto.usuarioToDto(usuario);
+            	return usuarioDto;
+            }
+            
+            return null;
+            
         } catch (Exception e) {
             logger.error("Error en buscarUsuarioEmail: " + e.getMessage(), e);
             return null; 

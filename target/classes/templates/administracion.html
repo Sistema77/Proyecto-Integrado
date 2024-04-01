@@ -38,14 +38,21 @@
 			<div class="card-header"><h3>Administración</h3></div>
 			<div class="card-body" >
 
-				<h5 class="card-title text-center text-danger" th:if="${#lists.isEmpty(usuarios)}">No hay usuarios registrados</h5>
-
-				<h4 class="card-title">
+				<!--  <h5 class="card-title text-center text-danger" th:if="${not #lists.isEmpty(usuario)}">No hay usuarios registrados</h5>-->
+				<h5 class="card-title text-center text-danger" th:if="${usuario == null}">
+				    No se ha encontrado al usuario
+				</h5>
+				<h4 class="card-title d-flex justify-content-between">
 					<a sec:authorize="hasRole('ADMIN')" th:href="@{/auth/registrar}" class="btn btn-dark" th:if="${not #lists.isEmpty(usuarios)}">
 						crear usuario
 					</a>
+					<form class="d-flex" th:action="@{/privada/buscarUsuario}" method="get">
+					    <input class="form-control me-2" type="search" placeholder="Buscar por email" aria-label="Buscar" name="email">
+					    <button class="btn btn-outline-success" type="submit">Buscar</button>
+					</form>
 				</h4>
-				<table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(usuarios)}">
+				
+				<table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(usuarios) || not #lists.isEmpty(usuario)}">
 					<thead class="thead-inverse">
 						<tr>
 							<th class="table-dark">id</th>
@@ -58,7 +65,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="usuario : ${usuarios}">
+						<tr th:if="${not #lists.isEmpty(usuarios)}" th:each="usuario : ${usuarios}">
 							<td th:text="${usuario.id_usuario}"></td>
 							<td th:text="${usuario.name}"></td>
 							<td th:text="${usuario.lastName}"></td>
@@ -67,18 +74,36 @@
 							<td sec:authorize="hasRole('ROLE_ADMIN')">
 								<form class="form" th:action="@{'/privada/modificar/' + ${usuario.id_usuario}}"  method="post">
 									<input type="hidden" name="id" th:value="${usuario.id_usuario}" />
-									<button type="submit" class="btn btn-primary"
-										th:text="modificar"></button>
+									<button type="submit" class="btn btn-primary" th:text="modificar"></button>
 								</form>
 							</td>
 							<td sec:authorize="hasRole('ROLE_ADMIN')">
 								<form class="form" th:action="@{'/privada/eliminar/' + ${usuario.id_usuario}}" method="post">
 									<input type="hidden" name="id" th:value="${usuario.id_usuario}" />
-									<button type="submit" class="btn btn-danger"
-										th:text="eliminar"></button>
+									<button type="submit" class="btn btn-danger" th:text="eliminar"></button>
 								</form>
 							</td>
 						</tr>
+						<tr th:if="${not #lists.isEmpty(usuario)}">
+							<td th:text="${usuario.id_usuario}"></td>
+							<td th:text="${usuario.name}"></td>
+							<td th:text="${usuario.lastName}"></td>
+							<td th:text="${usuario.email}"></td>
+							<td th:text="${usuario.dni}"></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')">
+								<form class="form" th:action="@{'/privada/modificar/' + ${usuario.id_usuario}}"  method="post">
+									<input type="hidden" name="id" th:value="${usuario.id_usuario}" />
+									<button type="submit" class="btn btn-primary" th:text="modificar"></button>
+								</form>
+							</td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')">
+								<form class="form" th:action="@{'/privada/eliminar/' + ${usuario.id_usuario}}" method="post">
+									<input type="hidden" name="id" th:value="${usuario.id_usuario}" />
+									<button type="submit" class="btn btn-danger" th:text="eliminar"></button>
+								</form>
+							</td>
+						</tr>
+						
 					</tbody>
 				</table>
 			</div>

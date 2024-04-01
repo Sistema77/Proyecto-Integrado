@@ -1,5 +1,6 @@
 package Proyecto.Java.Final.Controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import Proyecto.Java.Final.DAO.UsuarioDAO;
 import Proyecto.Java.Final.DTO.UsuarioDTO;
@@ -122,5 +124,35 @@ public class AdministradorControlador {
              logger.error("Error en modificarUsuario: " + e.getMessage(), e);
              return "redirect:/privada/administracion"; 
          }
+    }
+    
+    // Busca a un usuario introducido por el email
+    @GetMapping("/privada/buscarUsuario")
+    public String buscarUsuarioPorEmail(@RequestParam("email") String email, Model model, HttpServletRequest request, Authentication authentication) {
+        try {
+            // Verifica si el usuario tiene el rol de administrador
+            if(request.isUserInRole("ROLE_ADMIN")) {
+                // Busca al usuario por email
+                UsuarioDTO usuario = usuarioServicio.buscarUsuarioEmail(email);
+
+                // Agrega el usuario encontrado al modelo para mostrarlo en la vista
+                model.addAttribute("usuario", usuario);
+                
+                model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
+                return "administracion"; // Nombre de la vista donde mostrarás la información del usuario encontrado
+            } 
+            
+            // Si el usuario no es administrador, agrega un mensaje de error al modelo y redirige a la página de inicio
+            model.addAttribute("noAdmin", "No eres admin");
+            model.addAttribute("name", authentication.getName());
+            model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
+            
+            return "home";
+        } catch (Exception e) {
+            // Manejo de errores
+            logger.error("Error en buscarUsuarioPorEmail: " + e.getMessage(), e);
+            model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
+            return "home"; 
+        }
     }
 }
