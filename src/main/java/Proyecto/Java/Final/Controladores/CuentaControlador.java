@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Proyecto.Java.Final.DAO.CuentaDAO;
-import Proyecto.Java.Final.DAO.UsuarioDAO;
 import Proyecto.Java.Final.DTO.CuentaDTO;
-import Proyecto.Java.Final.DTO.UsuarioDTO;
+
 import Proyecto.Java.Final.Servicios.ICuentaServicio;
 import Proyecto.Java.Final.Servicios.ICuentaToDto;
 import Proyecto.Java.Final.Servicios.IUsuarioServicio;
-import Proyecto.Java.Final.Util.ImagenBinario;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -140,5 +139,24 @@ public class CuentaControlador {
 	            return "redirect:/privada/ver-cuenta"; 
 	        }
 	        
+	    }
+	    
+	    // Entra en la Gestion de la Cuenta
+	    @PostMapping("/privada/gestion/cuenta/{id}")
+	    public String envioGestionCuenta(@PathVariable long id, Model model, HttpServletRequest request) { 
+	    	try {
+	    		// Busca cuenta y la pasa a DTO
+	    		CuentaDAO cuentaDao = cuentaServicio.buscarCuentaId(id);
+	    		CuentaDTO cuentaDto = cuentaToDto.cuentaToDto(cuentaDao);
+	    		
+	    		// Manda la cuenta al formulario
+	    		model.addAttribute("cuenta", cuentaDto);
+	    		
+	    		return "gestionCuenta";
+	    		
+	    	}catch(Exception e) {
+	    		logger.error("Error en Envio a Gestion de Cuenta: " + e.getMessage(), e);
+	            return "redirect:/privada/ver-cuenta"; 
+	    	}
 	    }
 }

@@ -14,8 +14,8 @@ public interface CuentaRepositorio extends JpaRepository<CuentaDAO, Long>{
 	public CuentaDAO findById(long id);
 	
 	//Método que devuelve todos los usuario de la base de datos
-	
 	public List<CuentaDAO> findAll();
 	
+	// Método que devuelve una lista con las cuentas que esten relacionado con el usuario
 	public List<CuentaDAO> findByUsuario(UsuarioDAO usuario);
 }

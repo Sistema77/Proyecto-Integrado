@@ -39,6 +39,7 @@ public class FacturaDAO {
 	// Constructor
 	public FacturaDAO() {}
 
+	// Getter/Setter
 	public Long getId_factura() {
 		return id_factura;
 	}
@@ -86,7 +87,4 @@ public class FacturaDAO {
 	public void setCuenta(CuentaDAO cuenta) {
 		this.cuenta = cuenta;
 	}
-	
-	// Getter/Setter
-	
 }

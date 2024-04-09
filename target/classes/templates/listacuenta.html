@@ -46,19 +46,27 @@
         <table class="table table-striped table-bordered" th:if="${not #lists.isEmpty(cuentas)}">
             <thead class="thead-inverse">
                 <tr>
-                    <th class="table-dark">Numero Cuenta</th>
-                    <th class="table-dark">saldo</th>
-                    <th class="table-dark">conNomina</th>
-
-                    <th class="table-dark">editar</th>
-                    <th class="table-dark">eliminar</th>
+                    <th class="table-dark text-center">Numero Cuenta</th>
+                    <th class="table-dark text-center">saldo</th>
+                    <th class="table-dark text-center">conNomina</th>
+					<th class="table-dark text-center">Entrar</th>
+                    <th class="table-dark text-center">editar</th>
+                    <th class="table-dark text-center">eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="cuenta : ${cuentas}">
-                    <td th:text="${cuenta.numeroCuenta}"></td>
-                    <td th:text="${cuenta.saldo}"></td>
-                    <td th:text="${cuenta.conNomina}"></td>
+                    <td class="text-center" th:text="${cuenta.numeroCuenta}"></td>
+                    <td class="text-center" th:text="${cuenta.saldo} + €"></td>
+                    <td class="text-center" th:text="${cuenta.conNomina}? 'Si' : 'No'"></td>
+                    <td>
+                    	<form class="form" th:action="@{'/privada/gestion/cuenta/' + ${cuenta.id_cuenta}}"
+                            method="post">
+                            <input type="hidden" name="id" th:value="${cuenta.id_cuenta}" />
+                            <button type="submit" class="btn btn-success" th:text="Gestionar"></button>
+                        </form>
+                    	
+                    </td>
                     <td>
                         <form class="form" th:action="@{'/privada/modificarcuenta/' + ${cuenta.id_cuenta}}"
                             method="post">
