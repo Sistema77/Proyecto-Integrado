@@ -17,8 +17,8 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class TrasferenciaControlador {
-	@Autowired
-	private IMovimientoCuentaServicio movimientoCuentaServicio;
+	//@Autowired
+	//private IMovimientoCuentaServicio movimientoCuentaServicio;
 	
 	@Autowired
     private IUsuarioServicio usuarioServicio;
@@ -26,7 +26,7 @@ public class TrasferenciaControlador {
 	private static final Logger logger = LoggerFactory.getLogger(TrasferenciaControlador.class);
 	
 	// Metodo para home de Trasferecia
-	@GetMapping("/privada/administracion")
+	@GetMapping("/privada/trasferencia/{id}")
 	public String homeTrasfetencia(Model model, HttpServletRequest request, Authentication authentication) {
 		try {
 			// Verifica si el usuario tiene el rol de administrador
@@ -34,7 +34,7 @@ public class TrasferenciaControlador {
             	
                 // foto para mostrar en la vista
                 model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
-                return "administracion";    
+                return "trasferencia";    
             } 
             return "home";
 		}catch(Exception e) {

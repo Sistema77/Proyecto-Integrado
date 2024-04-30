@@ -45,4 +45,11 @@ nav {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif; /* Familia de fuentes */
     font-weight: 800;
 }
+
+.custom-input {
+    /* Quitar la decoración predeterminada */
+    -webkit-appearance: none; /* Safari y Chrome */
+    -moz-appearance: textfield; /* Firefox */
+    appearance: none; /* Otros navegadores */
+}
   

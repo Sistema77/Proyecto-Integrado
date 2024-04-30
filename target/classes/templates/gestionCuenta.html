@@ -42,19 +42,19 @@
 		<div class="d-flex justify-content-evenly">
 			<ul  class="d-flex justify-content-evenly">
 				<li class="list-group-item">
-					<a th:href="@{'/privada/cuenta/trasferencia' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Hacer Trasferencia</a>
+					<a th:href="@{'/privada/trasferencia/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Hacer Trasferencia</a>
 				</li>
 				<li class="list-group-item">
-					<a th:href="@{'/privada/cuenta/factura' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Pagar Factura</a>
+					<a th:href="@{'/privada/factura/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Pagar Factura</a>
 				</li>
 				<li class="list-group-item">
-					<a th:href="@{'/privada/cuenta/ingresar' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Ingresar/Sacar Dinero</a>
+					<a th:href="@{'/privada/ingresar/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Ingresar/Sacar Dinero</a>
 				</li>
 				<li class="list-group-item">
-					<a th:href="@{'/privada/cuenta/historial' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Historial</a>
+					<a th:href="@{'/privada/historial/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Historial</a>
 				</li>
 				<li class="list-group-item">
-					<a th:href="@{'/privada/cuenta/simulador' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Simular Credito</a>
+					<a th:href="@{'/privada/simulador/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Simular Credito</a>
 				</li>
 			</ul>
 		</div>
