@@ -38,15 +38,26 @@
 		</div>
 	</nav>
 
+	<h1 th:text="${cuenta.numeroCuenta}"></h1>
 	<div class="container">
 		<div class="position-absolute top-50 start-50 translate-middle">
 			<ul  class="list-group">
 				<li class="list-group-item">
 					<p class="titulo">Trasferencia</p>
-					<form class="form" id="trasferenciaform" method="POST" th:action="@{/privada/}" role="form">
-						<input id="ncuenta" type="text" class="input" name="ncuenta" placeholder="Numero Cuenta" required>
+					<form class="form" id="cuentaDto" method="POST" th:action="@{'/privada/trasferencia/cuenta/' + ${cuenta.id_cuenta}}" role="form">
+						<input id="cuenta_envia" type="text" class="input" name="cuenta_envia" placeholder="Numero Cuenta" required>
 						<input id="cantidad" type="number" class="input custom-input" name="cantidad" placeholder="Cantidad" required>
-						<button type="submit" class="col-12 form-btn">Enviar</button>
+						<input id="descripcion" type="text" class="input" name="descripcion" placeholder="Descripcion" required>
+						<div class="form-group">
+					      <label for="inputState">Tipo Movimiento</label>
+					      <select id="tipo_movimiento" class="form-control" name="tipo_movimiento">
+					        <option value="reformas" selected>Reformas</option>
+					        <option value="coche">Coche</option>
+					        <option value="efic. energética">Efic. energética</option>
+					        <option value="otros">Otros</option>
+					      </select>
+					    </div>
+						<button type="submit" class="col-12 form-btn">Hacer Trasferencia</button>
 					</form>
 				</li>
 			</ul>

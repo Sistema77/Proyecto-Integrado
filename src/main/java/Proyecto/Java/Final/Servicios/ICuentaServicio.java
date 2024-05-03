@@ -22,4 +22,7 @@ public interface ICuentaServicio {
 	public boolean numeroCuentaExiste(String num);
 	
 	public String crearNumeroCuenta();
+	
+	//Comprobar si la Cuenta tiene dinero suficiente para realizar el pago
+	public boolean comprobacionDineroCuenta(String numeroCuenta, double pago);
 }

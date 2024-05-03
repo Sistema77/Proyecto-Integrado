@@ -46,7 +46,7 @@ public class AdministradorControlador {
                 // Agrega la lista de usuarios al modelo para mostrarla en la vista
                 model.addAttribute("usuarios", usuarios);
                 model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
-                return "trasferencia";    
+                return "administracion";    
             } 
             
             // Si el usuario no es administrador, agrega un mensaje de error al modelo y redirige a la página de inicio

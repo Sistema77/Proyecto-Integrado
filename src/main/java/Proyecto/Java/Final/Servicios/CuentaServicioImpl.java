@@ -184,7 +184,7 @@ public class CuentaServicioImpl implements ICuentaServicio{
     	boolean re = false;
     	
     	for(CuentaDAO cuenta : listaCuenta) {
-    		if(cuenta.getNumeroCuenta() == num) {
+    		if(cuenta.getNumeroCuenta().equals(num)) {
     			re = true;
     		}
     	}
@@ -223,4 +223,24 @@ public class CuentaServicioImpl implements ICuentaServicio{
     	}
     	return nC;
     }
+    
+    @Override
+    public boolean comprobacionDineroCuenta(String numeroCuenta, double pago) {
+    	try {
+    		CuentaDAO cuenta = new CuentaDAO();
+    		
+    		
+    		cuenta = cuentaRepositorio.findByNumeroCuenta(numeroCuenta);
+    		
+    		if(cuenta.getSaldo() >= pago) {
+    			return true;
+    		}
+    		
+    		return false;
+    		
+    	}catch(Exception e ) {
+    		logger.error("Error en la comprobación [comprobacionDineroCuenta]: " + e.getMessage(), e);
+    		return false;
+    	}
+    } 
 }
