@@ -83,8 +83,13 @@ public class TrasferenciaControlador {
 			System.out.println(cuentaDto.toString());
 			if(t && !cuentaDto.getCuenta_envia().equals(cuentaServicio.buscarCuentaId(id).getNumeroCuenta())) { /////////////
 				// Comprobar si la Cuenta tiene suficiente Saldo
-				if(cuentaServicio.comprobacionDineroCuenta(cuentaServicio.buscarCuentaId(id).getNumeroCuenta(), cuentaDto.getCantidad_dinero())) {
+				
+				String numeroCuenta = cuentaServicio.buscarCuentaId(id).getNumeroCuenta();
+				double cantidadDinero = cuentaDto.getCantidad_dinero();
+				
+				if(cuentaServicio.comprobacionDineroCuenta(numeroCuenta, cantidadDinero)) {
 					// Realizar la trasferencia
+					
 					MovimientoCuentaDAO trasferencia = new MovimientoCuentaDAO();
 					
 					trasferencia.setCantidad_dinero(cuentaDto.getCantidad_dinero());
@@ -95,6 +100,11 @@ public class TrasferenciaControlador {
 					trasferencia.setCuenta_envia(cuentaDto.getCuenta_envia());
 					
 					movimoentoRepositorio.save(trasferencia);
+					
+					// Pasar el Dinero de una Cuenta a otra
+						//Resta el dinero de una Cuenta
+					
+						//Se le suma a la otra Cuenta
 				}
 				
 			}
