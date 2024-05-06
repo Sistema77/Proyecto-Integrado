@@ -102,13 +102,16 @@ public class TrasferenciaControlador {
 					movimoentoRepositorio.save(trasferencia);
 					
 					// Pasar el Dinero de una Cuenta a otra
+					cuentaServicio.sacarDineroCuenta(numeroCuenta, cantidadDinero);
 						//Resta el dinero de una Cuenta
 					
+					cuentaServicio.ponerDineroCuenta(cuentaDto.getCuenta_envia(), cantidadDinero);
 						//Se le suma a la otra Cuenta
+					
+					model.addAttribute("ok", "Operación realizada con exito");
 				}
 				
 			}
-			
 			
 			model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
 			return "home";

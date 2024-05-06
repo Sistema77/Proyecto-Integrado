@@ -25,4 +25,9 @@ public interface ICuentaServicio {
 	
 	//Comprobar si la Cuenta tiene dinero suficiente para realizar el pago
 	public boolean comprobacionDineroCuenta(String numeroCuenta, double pago);
+	
+	// Quitar el dinero de la cuenta
+	public boolean sacarDineroCuenta(String numeroCuenta, double dinero);
+	// Poner el dinero en la cuenta
+	public boolean ponerDineroCuenta(String numeroCuenta, double dinero);
 }

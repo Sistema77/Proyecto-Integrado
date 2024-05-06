@@ -229,7 +229,6 @@ public class CuentaServicioImpl implements ICuentaServicio{
     	try {
     		CuentaDAO cuenta = new CuentaDAO();
     		
-    		
     		cuenta = cuentaRepositorio.findByNumeroCuenta(numeroCuenta);
     		
     		if(cuenta.getSaldo() >= pago) {
@@ -242,5 +241,50 @@ public class CuentaServicioImpl implements ICuentaServicio{
     		logger.error("Error en la comprobación [comprobacionDineroCuenta]: " + e.getMessage(), e);
     		return false;
     	}
-    } 
+    }
+
+	@Override
+	public boolean sacarDineroCuenta(String numeroCuenta, double dinero) {
+		try {
+			
+			CuentaDAO cuenta = new CuentaDAO();
+    		
+    		cuenta = cuentaRepositorio.findByNumeroCuenta(numeroCuenta);
+    		
+    		if(cuenta != null && dinero > 0) {
+    			cuenta.setSaldo(cuenta.getSaldo()-dinero);
+    			cuentaRepositorio.save(cuenta);
+    			return true;
+    		}
+    		
+    		return false;
+    		
+		}catch(Exception e) {
+			logger.error("Error [sacarDineroCuenta]: " + e.getMessage(), e);
+    		return false;
+		}
+	}
+
+	@Override
+	public boolean ponerDineroCuenta(String numeroCuenta, double dinero) {
+try {
+			
+			CuentaDAO cuenta = new CuentaDAO();
+    		
+    		cuenta = cuentaRepositorio.findByNumeroCuenta(numeroCuenta);
+    		
+    		if(cuenta != null && dinero > 0) {
+    			cuenta.setSaldo(cuenta.getSaldo()+dinero);
+    			cuentaRepositorio.save(cuenta);
+    			return true;
+    		}
+    		
+    		return false;
+    		
+		}catch(Exception e) {
+			logger.error("Error [sacarDineroCuenta]: " + e.getMessage(), e);
+    		return false;
+		}
+	} 
+    
 }
