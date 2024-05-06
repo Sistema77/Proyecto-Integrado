@@ -47,7 +47,7 @@ public class TrasferenciaControlador {
 	@GetMapping("/privada/trasferencia/{id}")
 	public String homeTrasferencia(@PathVariable long id, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
-			// Verifica si el usuario tiene el rol de administrador
+			// Verifica si es 
             if(request.isUserInRole("ROLE_USER")) {
             	// Comprobar si el Usuario es el dueño de esa Cuenta
             	CuentaDAO Cuenta = new CuentaDAO();
@@ -121,5 +121,4 @@ public class TrasferenciaControlador {
 			return "home";
 		}
 	}
-	
 }

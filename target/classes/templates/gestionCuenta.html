@@ -48,7 +48,7 @@
 					<a th:href="@{'/privada/factura/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Pagar Factura</a>
 				</li>
 				<li class="list-group-item">
-					<a th:href="@{'/privada/ingresar/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Ingresar/Sacar Dinero</a>
+					<a th:href="@{'/privada/movimientocuenta/cajero/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Ingresar/Sacar Dinero</a>
 				</li>
 				<li class="list-group-item">
 					<a th:href="@{'/privada/historial/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Historial</a>
