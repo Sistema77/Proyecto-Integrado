@@ -7,7 +7,7 @@ import Proyecto.Java.Final.DTO.CuentaDTO;
 
 
 public interface ICuentaToDao {
-	//Metodo que convierte campo a campo un objeto UsuarioDTO a DAO
+	//Metodo que convierte campo a campo un objeto DTO a DAO
 
 	public CuentaDAO cuentaToDao(CuentaDTO cuentaDTO);
 	
