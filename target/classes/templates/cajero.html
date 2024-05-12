@@ -42,10 +42,10 @@
 		<div class="position-absolute top-50 start-50 translate-middle">
 			<ul  class="list-group">
 				<li class="list-group-item">
-					<a th:href="@{/privada/trasaccion/ingresar}" class="btn btn-success m-4">Ingresar</a>
+					<a th:href="@{'/privada/movimientocuenta/ingreso/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Ingresar</a>
 				</li>
 				<li class="list-group-item">
-					<a th:href="@{/privada/trasaccion/retirada}" class="btn btn-success m-4">Retirar</a>
+					<a th:href="@{'/privada/movimientocuenta/retirar/' + ${cuenta.id_cuenta}}" class="btn btn-success m-4">Retirar</a>
 				</li>
 			</ul>
 		</div>

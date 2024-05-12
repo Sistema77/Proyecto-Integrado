@@ -21,7 +21,8 @@ public class TransacionToDaoImple implements ITransacionToDao{
 			dao.setCantidadDinero(traDto.getCantidadDinero());
 			dao.setCuenta(traDto.getCuenta());
 			dao.setFecha_Hora(traDto.getFecha_Hora());
-			dao.setTipoTrasa(traDto.getTipoTrasa());
+			dao.setDescripcion(traDto.getDescripcion());
+			dao.setCuenta_enviada(traDto.getCuenta_enviada());
 			
 			return dao;
 			

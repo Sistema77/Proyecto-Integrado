@@ -30,4 +30,7 @@ public interface ICuentaServicio {
 	public boolean sacarDineroCuenta(String numeroCuenta, double dinero);
 	// Poner el dinero en la cuenta
 	public boolean ponerDineroCuenta(String numeroCuenta, double dinero);
+	
+	//Guardar Cuenta 
+	public CuentaDAO guardarCuenta(CuentaDAO cuenta);
 }

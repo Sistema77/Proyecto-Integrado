@@ -33,9 +33,6 @@ public class MovimientoCuentaDAO {
 		@Column(name = "fecha_Hora")
 		private Calendar fecha_Hora;
 		
-		@Column(name = "cuenta_envia")
-		private String cuenta_envia;
-		
 		@ManyToOne
 		@JoinColumn(name = "cuenta")
 		private CuentaDAO cuenta;
@@ -91,16 +88,5 @@ public class MovimientoCuentaDAO {
 		public void setFecha_Hora(Calendar fecha_Hora) {
 			this.fecha_Hora = fecha_Hora;
 		}
-
-		public String getCuenta_envia() {
-			return cuenta_envia;
-		}
-
-		public void setCuenta_envia(String cuenta_envia) {
-			this.cuenta_envia = cuenta_envia;
-		}
-	
-		
-	
 		
 }

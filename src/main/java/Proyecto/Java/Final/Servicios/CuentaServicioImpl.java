@@ -287,4 +287,14 @@ try {
 		}
 	} 
     
+	@Override
+	public CuentaDAO guardarCuenta(CuentaDAO cuenta) {
+		try {
+			cuentaRepositorio.save(cuenta);
+			return cuenta;
+		}catch(Exception e) {
+			logger.error("Error [guardarCuenta]: " + e.getMessage(), e);
+    		return null;
+		}
+	}
 }

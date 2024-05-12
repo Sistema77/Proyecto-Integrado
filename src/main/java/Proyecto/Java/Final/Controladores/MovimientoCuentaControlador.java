@@ -8,12 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import Proyecto.Java.Final.DAO.CuentaDAO;
 import Proyecto.Java.Final.DAO.TransacionDAO;
 import Proyecto.Java.Final.DAO.UsuarioDAO;
 import Proyecto.Java.Final.DTO.TransacionDTO;
 import Proyecto.Java.Final.Servicios.ICuentaServicio;
+import Proyecto.Java.Final.Servicios.ITransacionServicio;
 import Proyecto.Java.Final.Servicios.IUsuarioServicio;
 import Proyecto.Java.Final.Servicios.TransacionToDaoImple;
 import Proyecto.Java.Final.Servicios.TransacionToDtoImple;
@@ -27,6 +29,9 @@ public class MovimientoCuentaControlador {
 	
 	@Autowired
 	private ICuentaServicio cuentaServicio;
+	
+	@Autowired
+	private ITransacionServicio transacionServicio;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MovimientoCuentaControlador.class);
 	
@@ -90,7 +95,7 @@ public class MovimientoCuentaControlador {
 		}
 	}
 	
-	@GetMapping("/privada/movimientocuenta/pago/{id}")
+	@GetMapping("/privada/movimientocuenta/retirar/{id}")
 	public String sacar(@PathVariable long id, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
 			// Verifica si es usuario
@@ -104,7 +109,7 @@ public class MovimientoCuentaControlador {
             	if(UsuarioDAO != null) {
             		model.addAttribute("cuenta", Cuenta);
             		model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
-            		return "pago";
+            		return "retirar";
             	}
             }
             // foto para mostrar en la vista
@@ -119,22 +124,31 @@ public class MovimientoCuentaControlador {
 		}
 	}
 	
-	@GetMapping("/privada/movimientocuenta/pago/realizar/{id}")
+	///////////////////////////////////
+	@PostMapping("/privada/movimientocuenta/retirar/realizar/{id}")
 	public String realizarPago(@PathVariable long id, TransacionDTO trasacion, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
-			CuentaDAO cuenta = new CuentaDAO();
+			if(trasacion.getCantidadDinero() > 0 ) {
+				CuentaDAO cuenta = new CuentaDAO();
+				
+				cuenta = cuentaServicio.buscarCuentaId(id);
+				
+				cuenta.setSaldo(cuenta.getSaldo()-trasacion.getCantidadDinero());
+				
+				// Pasar de DTO a DAO
+				TransacionToDaoImple e = new TransacionToDaoImple();
+				TransacionDAO trasacionDao = e.trasacionToDao(trasacion);
+				
+				// Guardar Cuenta y el Trasaccion
+				cuentaServicio.guardarCuenta(cuenta);
+				transacionServicio.guardar(trasacionDao);
+	
+				model.addAttribute("info", "Pago Realizado");
+				return "home";
+			}
 			
-			cuenta = cuentaServicio.buscarCuentaId(id);
-			
-			cuenta.setSaldo(cuenta.getSaldo()-trasacion.getCantidadDinero());
-			
-			// Pasar de DTO a DAO
-			TransacionToDaoImple e = new TransacionToDaoImple();
-			TransacionDAO trasacionDao = e.trasacionToDao(trasacion);
-			
-			// Guardar Cuenta y el Trasaccion
-			
-			//////////////////)
+			model.addAttribute("error", "No puede retirara esa cantidad");
+			return "cajero";
 			
 		}catch(Exception e) {
 			logger.error("Error en realizarPago: " + e.getMessage(), e);
@@ -143,7 +157,7 @@ public class MovimientoCuentaControlador {
 		}
 	}
 	
-	@GetMapping("/privada/movimientocuenta/ingreso/realizar/{id}")
+	/*@GetMapping("/privada/movimientocuenta/ingreso/realizar/{id}")
 	public String realizarIngreso(@PathVariable long id, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
 			
@@ -152,6 +166,6 @@ public class MovimientoCuentaControlador {
 			model.addAttribute("error", "Erro no tiene permisos para acceder a esta cuenta");
 			return "home";
 		}
-	}
+	}*/
 	
 }

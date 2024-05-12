@@ -45,8 +45,8 @@
 				<li class="list-group-item">
 					<p class="titulo">Trasferencia</p>
 					<form class="form" id="cuentaDto" method="POST" th:action="@{'/privada/trasferencia/cuenta/' + ${cuenta.id_cuenta}}" role="form">
-						<input id="cuenta_envia" type="text" class="input" name="cuenta_envia" placeholder="Numero Cuenta" required>
-						<input id="cantidad_dinero" type="number" class="input custom-input" name="cantidad_dinero" placeholder="Cantidad" required>
+						<input id="cuenta_enviada" type="text" class="input" name="cuenta_enviada" placeholder="Numero Cuenta" required>
+						<input id="cantidadDinero" type="number" class="input custom-input" name="cantidadDinero" placeholder="Cantidad" required>
 						<input id="descripcion" type="text" class="input" name="descripcion" placeholder="Descripcion" required>
 						<div class="form-group">
 					      <label for="inputState">Tipo Movimiento</label>

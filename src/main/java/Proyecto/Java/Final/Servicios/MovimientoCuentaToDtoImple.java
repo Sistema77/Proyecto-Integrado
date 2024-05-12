@@ -21,7 +21,6 @@ public class MovimientoCuentaToDtoImple implements IMovimientoCuentaToDto{
 			
 			dto.setCantidad_dinero(u.getCantidad_dinero());
 			dto.setCuenta(u.getCuenta());
-			dto.setCuenta_envia(null);
 			dto.setDescripcion(u.getDescripcion());
 			dto.setFecha_Hora(u.getFecha_Hora());
 			dto.setId_movimiento(u.getId_movimiento());

@@ -22,7 +22,8 @@ public class TransacionToDtoImple implements ITransacionToDto{
 			dto.setCantidadDinero(traDao.getCantidadDinero());
 			dto.setCuenta(traDao.getCuenta());
 			dto.setFecha_Hora(traDao.getFecha_Hora());
-			dto.setTipoTrasa(traDao.getTipoTrasa());
+			dto.setDescripcion(traDao.getDescripcion());
+			dto.setCuenta_enviada(traDao.getCuenta_enviada());
 			
 			return dto;
 			

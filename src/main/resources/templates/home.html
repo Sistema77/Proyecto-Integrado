@@ -43,6 +43,9 @@
 	<div th:if="${not #strings.isEmpty(noAdmin)}">
 	   Acceso Restringido, No tiene permisos
 	</div>
+		<script th:if="${not #strings.isEmpty(error)}">
+		notificacion("¡Error!","Ocurrio un error no esperado, intentelo de nuevo", 'error');
+	</script>
 </body>
 
 </html>

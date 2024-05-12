@@ -24,30 +24,10 @@
 		</div>
 	</nav>
 	<div class="contenedor form-registro">
-		<p class="titulo">Registro</p>
-		 <form class="form" th:action="@{/auth/registrar}" enctype="multipart/form-data" method="post">
-			<input type="text" id="name" name="name" class="input" placeholder="Nombre"
-				required th:value="*{name}">
-				
-			<input type="text" id="lastName" name="lastName" class="input" placeholder="Apellidos"
-				required th:value="*{lastName}">
-				
-			<input type="text" id="dni" name="dni" class="input" placeholder="DNI" required
-				th:value="*{dni}">
-				
-			<input type="text" id="tlf" name="tlf" class="input" placeholder="Telefono"
-				required th:value="*{tlf}">
-				
-			<input type="email" id="email" name="email" class="input" placeholder="Email"
-				required th:value="*{email}">
-				
-			<input type="file" id="profilePicture" name="profilePicture" 
-			required th:value="*{foto}" accept="image/*"  />
-			
-			<input type="password" id="password" name="password" class="input" placeholder="Contraseña"
-				required th:value="*{password}">
-				
-			<button type="submit" id="btnRegistro" class="form-btn">Registrarse</button> 
+		<p class="titulo">Pago</p>
+		 <form class="form" id="cuentaDto" th:action="@{'/privada/movimientocuenta/retirar/realizar/' + ${cuenta.id_cuenta}}" enctype="multipart/form-data" method="post">
+			<input type="text" id="cantidadDinero" name="cantidadDinero" class="input" placeholder="Cantidad a Retirar" >	
+			<button type="submit" id="btnRegistro" class="form-btn">Retirar</button> 
 		</form>
 	</div>
 	

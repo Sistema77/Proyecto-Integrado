@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import Proyecto.Java.Final.DAO.CuentaDAO;
 import Proyecto.Java.Final.DAO.MovimientoCuentaDAO;
+import Proyecto.Java.Final.DAO.TransacionDAO;
 import Proyecto.Java.Final.DAO.UsuarioDAO;
 import Proyecto.Java.Final.DTO.CuentaDTO;
 import Proyecto.Java.Final.DTO.MovimientoCuentaDTO;
+import Proyecto.Java.Final.DTO.TransacionDTO;
 import Proyecto.Java.Final.DTO.UsuarioDTO;
 import Proyecto.Java.Final.Repositorio.MovimoentoCuentaRepositorio;
+import Proyecto.Java.Final.Repositorio.TransacionRepositorio;
 import Proyecto.Java.Final.Servicios.ICuentaServicio;
 import Proyecto.Java.Final.Servicios.IMovimientoCuentaServicio;
 import Proyecto.Java.Final.Servicios.IUsuarioServicio;
@@ -38,7 +41,7 @@ public class TrasferenciaControlador {
 	private ICuentaServicio cuentaServicio;
 	
 	@Autowired
-	private MovimoentoCuentaRepositorio movimoentoRepositorio;
+	private TransacionRepositorio transacionRepositorio;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(TrasferenciaControlador.class);
@@ -72,45 +75,46 @@ public class TrasferenciaControlador {
             return "home";
 		}
 	}
-	
+	///////////////////////////////////////////////////////////////////////////////////////////////
 	@PostMapping("/privada/trasferencia/cuenta/{id}")
-	public String hacerTrasferencia(@PathVariable long id, @ModelAttribute MovimientoCuentaDTO cuentaDto, Model model, HttpServletRequest request, Authentication authentication) {
+	public String hacerTrasferencia(@PathVariable long id, @ModelAttribute TransacionDTO cuentaDto, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
 			
 			// Comprobar si la Cuenta Existe
-			String cuent = cuentaDto.getCuenta_envia();
+			String cuent = cuentaDto.getCuenta_enviada();
 			boolean t = cuentaServicio.numeroCuentaExiste(cuent);
 			System.out.println(cuentaDto.toString());
-			if(t && !cuentaDto.getCuenta_envia().equals(cuentaServicio.buscarCuentaId(id).getNumeroCuenta())) { /////////////
+			if(t && !cuentaDto.getCuenta_enviada().equals(cuentaServicio.buscarCuentaId(id).getNumeroCuenta())) { /////////////
 				// Comprobar si la Cuenta tiene suficiente Saldo
 				
 				String numeroCuenta = cuentaServicio.buscarCuentaId(id).getNumeroCuenta();
-				double cantidadDinero = cuentaDto.getCantidad_dinero();
+				double cantidadDinero = cuentaDto.getCantidadDinero();
 				
 				if(cuentaServicio.comprobacionDineroCuenta(numeroCuenta, cantidadDinero)) {
 					// Realizar la trasferencia
 					
-					MovimientoCuentaDAO trasferencia = new MovimientoCuentaDAO();
+					TransacionDAO trasferencia = new TransacionDAO();
 					
-					trasferencia.setCantidad_dinero(cuentaDto.getCantidad_dinero());
+					trasferencia.setCantidadDinero(cuentaDto.getCantidadDinero());
 					trasferencia.setCuenta(cuentaServicio.buscarCuentaId(id));
 					trasferencia.setDescripcion(cuentaDto.getDescripcion());
 					trasferencia.setFecha_Hora(Calendar.getInstance());
-					trasferencia.setTipo_movimiento(cuentaDto.getTipo_movimiento());
-					trasferencia.setCuenta_envia(cuentaDto.getCuenta_envia());
+					trasferencia.setCuenta_enviada(cuentaDto.getCuenta_enviada());
 					
-					movimoentoRepositorio.save(trasferencia);
+					transacionRepositorio.save(trasferencia);
 					
 					// Pasar el Dinero de una Cuenta a otra
 					cuentaServicio.sacarDineroCuenta(numeroCuenta, cantidadDinero);
 						//Resta el dinero de una Cuenta
 					
-					cuentaServicio.ponerDineroCuenta(cuentaDto.getCuenta_envia(), cantidadDinero);
+					cuentaServicio.ponerDineroCuenta(cuentaDto.getCuenta_enviada(), cantidadDinero);
 						//Se le suma a la otra Cuenta
 					
 					model.addAttribute("ok", "Operación realizada con exito");
+					return "home";
 				}
-				
+				model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");
+				return "home";
 			}
 			
 			model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");

@@ -9,7 +9,8 @@ public class TransacionDTO {
 	private Long id_trasaciones;
 	private Double cantidadDinero;
 	private Calendar fecha_Hora;
-	private String tipoTrasa;
+	private String descripcion;
+	private String cuenta_enviada;
 	private CuentaDAO cuenta;
 
 
@@ -40,12 +41,12 @@ public class TransacionDTO {
 		this.fecha_Hora = fecha_Hora;
 	}
 
-	public String getTipoTrasa() {
-		return tipoTrasa;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setTipoTrasa(String tipoTrasa) {
-		this.tipoTrasa = tipoTrasa;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public CuentaDAO getCuenta() {
@@ -55,5 +56,14 @@ public class TransacionDTO {
 	public void setCuenta(CuentaDAO cuenta) {
 		this.cuenta = cuenta;
 	}
+
+	public String getCuenta_enviada() {
+		return cuenta_enviada;
+	}
+
+	public void setCuenta_enviada(String cuenta_enviada) {
+		this.cuenta_enviada = cuenta_enviada;
+	}
+	
 	
 }
