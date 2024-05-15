@@ -26,7 +26,7 @@
 	<div class="contenedor form-registro">
 		<p class="titulo">Pago</p>
 		 <form class="form" id="cuentaDto" th:action="@{'/privada/movimientocuenta/retirar/realizar/' + ${cuenta.id_cuenta}}" enctype="multipart/form-data" method="post">
-			<input type="text" id="cantidadDinero" name="cantidadDinero" class="input" placeholder="Cantidad a Retirar" >	
+			<input type="text" id="cantidad_dinero" name="cantidad_dinero" class="input" placeholder="Cantidad a Retirar" >	
 			<button type="submit" id="btnRegistro" class="form-btn">Retirar</button> 
 		</form>
 	</div>

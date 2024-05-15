@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class CCTrasferenciaControl {
 ///////////////////////////////////
-	@PostMapping("/privada/movimientocuenta/retirar/realizar/{id}")
+	/*@PostMapping("/privada/movimientocuenta/retirar/realizar/{id}")
 	public String realizarPago(@PathVariable long id, TransacionDTO trasacion, Model model, HttpServletRequest request,
 			Authentication authentication) {
 		try {

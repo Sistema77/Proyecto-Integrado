@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Proyecto.Java.Final.DAO.CuentaDAO;
+import Proyecto.Java.Final.DAO.MovimientoCuentaDAO;
 import Proyecto.Java.Final.DAO.TransacionDAO;
 import Proyecto.Java.Final.DAO.UsuarioDAO;
+import Proyecto.Java.Final.DTO.MovimientoCuentaDTO;
 import Proyecto.Java.Final.DTO.TransacionDTO;
 import Proyecto.Java.Final.Servicios.ICuentaServicio;
+import Proyecto.Java.Final.Servicios.IMovimientoCuentaServicio;
 import Proyecto.Java.Final.Servicios.ITransacionServicio;
 import Proyecto.Java.Final.Servicios.IUsuarioServicio;
+import Proyecto.Java.Final.Servicios.MovimientoCuentaToDaoImple;
 import Proyecto.Java.Final.Servicios.TransacionToDaoImple;
 import Proyecto.Java.Final.Servicios.TransacionToDtoImple;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +35,7 @@ public class MovimientoCuentaControlador {
 	private ICuentaServicio cuentaServicio;
 	
 	@Autowired
-	private ITransacionServicio transacionServicio;
+	private IMovimientoCuentaServicio movimientoCuentaServicio;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MovimientoCuentaControlador.class);
 	
@@ -126,25 +130,33 @@ public class MovimientoCuentaControlador {
 	
 	///////////////////////////////////
 	@PostMapping("/privada/movimientocuenta/retirar/realizar/{id}")
-	public String realizarPago(@PathVariable long id, TransacionDTO trasacion, Model model, HttpServletRequest request, Authentication authentication) {
+	public String realizarPago(@PathVariable long id, MovimientoCuentaDTO trasacion, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
-			if(trasacion.getCantidadDinero() > 0 ) {
+			if(trasacion.getCantidad_dinero() < 0 ) {
+				
 				CuentaDAO cuenta = new CuentaDAO();
 				
 				cuenta = cuentaServicio.buscarCuentaId(id);
+				//Comprobar si la cuenta tiene dinero suficiente
+				if(cuentaServicio.comprobacionDineroCuenta(cuenta.getNumeroCuenta(), trasacion.getCantidad_dinero())) {
+					double dinero = cuenta.getSaldo()-trasacion.getCantidad_dinero();
+					cuentaServicio.sacarDineroCuenta(cuenta.getNumeroCuenta(), dinero);
+
+					//Datos de la MovimientoCuenta
 				
-				cuenta.setSaldo(cuenta.getSaldo()-trasacion.getCantidadDinero());
+					
+					// Guardar Cuenta y el Trasaccion
+					cuentaServicio.guardarCuenta(cuenta);
+					movimientoCuentaServicio.registrar(trasacion);
+		
+					model.addAttribute("info", "Pago Realizado");
+					return "home";
+				}else {
+					model.addAttribute("error", "Pago No Realizado");
+					return "home";
+				}
 				
-				// Pasar de DTO a DAO
-				TransacionToDaoImple e = new TransacionToDaoImple();
-				TransacionDAO trasacionDao = e.trasacionToDao(trasacion);
 				
-				// Guardar Cuenta y el Trasaccion
-				cuentaServicio.guardarCuenta(cuenta);
-				transacionServicio.guardar(trasacionDao);
-	
-				model.addAttribute("info", "Pago Realizado");
-				return "home";
 			}
 			
 			model.addAttribute("error", "No puede retirara esa cantidad");

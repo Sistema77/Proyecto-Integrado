@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import Proyecto.Java.Final.DAO.MovimientoCuentaDAO;
 import Proyecto.Java.Final.DAO.UsuarioDAO;
 import Proyecto.Java.Final.DTO.MovimientoCuentaDTO;
 import Proyecto.Java.Final.Repositorio.MovimoentoCuentaRepositorio;
 
+@Service
 public class MovimientoCuentaServicioImpl implements IMovimientoCuentaServicio{
 
 	//Repositorios
@@ -20,11 +22,6 @@ public class MovimientoCuentaServicioImpl implements IMovimientoCuentaServicio{
 	@Autowired
 	private MovimoentoCuentaRepositorio movimientoCRepositorio;
 	
-	@Autowired
-	private IMovimientoCuentaToDao MovimientoCuentaToDAO;
-	
-	@Autowired
-	private IMovimientoCuentaToDto MovimientoCuentaToDTO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(UsuarioServicioImpl.class);
 	//Metodos
@@ -36,7 +33,9 @@ public class MovimientoCuentaServicioImpl implements IMovimientoCuentaServicio{
 			
 			MovimientoCuentaDAO movimientoDAO = new MovimientoCuentaDAO();  
 
-			movimientoDAO = MovimientoCuentaToDAO.movimientoCuentaToDao(movimientoCuentaDto);
+			IMovimientoCuentaToDao movimientoCuentaToDAO = new MovimientoCuentaToDaoImple();
+			
+			movimientoDAO = movimientoCuentaToDAO.movimientoCuentaToDao(movimientoCuentaDto);
 
 			movimientoCRepositorio.save(movimientoDAO);
 			logger.info("Movimiento " + movimientoDAO.getId_movimiento() + " REGISTRADO");
