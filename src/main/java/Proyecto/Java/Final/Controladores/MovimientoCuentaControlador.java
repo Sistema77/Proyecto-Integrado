@@ -1,5 +1,7 @@
 package Proyecto.Java.Final.Controladores;
 
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,18 +134,20 @@ public class MovimientoCuentaControlador {
 	@PostMapping("/privada/movimientocuenta/retirar/realizar/{id}")
 	public String realizarPago(@PathVariable long id, MovimientoCuentaDTO trasacion, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
-			if(trasacion.getCantidad_dinero() < 0 ) {
+			if(trasacion.getCantidad_dinero() > 0 ) {
 				
 				CuentaDAO cuenta = new CuentaDAO();
 				
 				cuenta = cuentaServicio.buscarCuentaId(id);
 				//Comprobar si la cuenta tiene dinero suficiente
 				if(cuentaServicio.comprobacionDineroCuenta(cuenta.getNumeroCuenta(), trasacion.getCantidad_dinero())) {
-					double dinero = cuenta.getSaldo()-trasacion.getCantidad_dinero();
-					cuentaServicio.sacarDineroCuenta(cuenta.getNumeroCuenta(), dinero);
+
+					cuentaServicio.sacarDineroCuenta(cuenta.getNumeroCuenta(), trasacion.getCantidad_dinero());
 
 					//Datos de la MovimientoCuenta
-				
+					trasacion.setTipo_movimiento("Retiro");
+					trasacion.setFecha_Hora(Calendar.getInstance());
+					trasacion.setCuenta(cuenta);
 					
 					// Guardar Cuenta y el Trasaccion
 					cuentaServicio.guardarCuenta(cuenta);
@@ -169,15 +173,41 @@ public class MovimientoCuentaControlador {
 		}
 	}
 	
-	/*@GetMapping("/privada/movimientocuenta/ingreso/realizar/{id}")
-	public String realizarIngreso(@PathVariable long id, Model model, HttpServletRequest request, Authentication authentication) {
+	@PostMapping("/privada/movimientocuenta/ingreso/realizar/{id}")
+	public String realizarIngreso(@PathVariable long id, Model model, MovimientoCuentaDTO trasacion,HttpServletRequest request, Authentication authentication) {
 		try {
-			
-		}catch(Exception e) {
+
+			if (trasacion.getCantidad_dinero() > 0) {
+
+				CuentaDAO cuenta = new CuentaDAO();
+
+				cuenta = cuentaServicio.buscarCuentaId(id);
+				// Comprobar si la cuenta tiene dinero suficiente
+
+				cuentaServicio.ponerDineroCuenta(cuenta.getNumeroCuenta(), trasacion.getCantidad_dinero());
+
+				// Datos de la MovimientoCuenta
+				trasacion.setTipo_movimiento("Ingreso");
+				trasacion.setFecha_Hora(Calendar.getInstance());
+				trasacion.setCuenta(cuenta);
+
+				// Guardar Cuenta y el Trasaccion
+				cuentaServicio.guardarCuenta(cuenta);
+				movimientoCuentaServicio.registrar(trasacion);
+
+				model.addAttribute("info", "Pago Realizado");
+				return "home";
+
+			}
+
+			model.addAttribute("error", "No puede retirara esa cantidad");
+			return "cajero";
+
+		} catch (Exception e) {
 			logger.error("Error en realizarIngreso: " + e.getMessage(), e);
 			model.addAttribute("error", "Erro no tiene permisos para acceder a esta cuenta");
 			return "home";
 		}
-	}*/
+	}
 	
 }
