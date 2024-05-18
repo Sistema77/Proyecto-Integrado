@@ -2,6 +2,8 @@ package Proyecto.Java.Final.DTO;
 
 import java.util.Calendar;
 
+import Proyecto.Java.Final.DAO.CuentaDAO;
+
 public class CreditoDTO {
 	// Atributos
 	private Long id_Credito;
@@ -12,6 +14,7 @@ public class CreditoDTO {
 	private Double CuotaMensual;
 	private Calendar fch_inicio;
 	private Calendar fch_final;
+	private CuentaDAO cuenta;
 
 	// Constructores
 	public CreditoDTO() {}
@@ -95,4 +98,16 @@ public class CreditoDTO {
 	public void setFch_final(Calendar fch_final) {
 		this.fch_final = fch_final;
 	}
+
+
+	public CuentaDAO getCuenta() {
+		return cuenta;
+	}
+
+
+	public void setCuenta(CuentaDAO cuenta) {
+		this.cuenta = cuenta;
+	}
+	
+	
 }

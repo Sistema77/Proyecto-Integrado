@@ -23,7 +23,7 @@ public class MovimientoCuentaServicioImpl implements IMovimientoCuentaServicio{
 	private MovimoentoCuentaRepositorio movimientoCRepositorio;
 	
 	
-	private static final Logger logger = LoggerFactory.getLogger(UsuarioServicioImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(MovimientoCuentaServicioImpl.class);
 	//Metodos
 	
 	@Override
