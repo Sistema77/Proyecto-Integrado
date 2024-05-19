@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
+	<link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script th:src="@{/script/script.js}"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+	<nav>
+		<div class="menu">
+			<div class="logo">
+				<a>RoBanck</a>
+				
+				<a> 
+					<img alt class="sizing-normal rounded"  th:if="${foto != null}"
+	                         th:src="'data:image/png;base64, ' + ${foto}" width="130" >
+				</a>
+				
+			</div>
+			<ul class="nav-links">
+				<li class= "text-center"><span th:text="${nombreUsuario}">usuario</span></li>
+				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/privada/cuenta}">Cuentas</a></li>
+				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/privada/administracion}">Administración</a></li>
+				<li>
+					<form th:action="@{/auth/logout}" method="post" id="logoutForm">
+						<button type="submit" class="btn btn-dark mt-2">Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	
+	<div class="contenedor form-registro">
+		<p class="titulo">Simulador Credito</p>
+		 <form class="form" th:action="@{'/privada/modificar/usuario/' + ${usuario.id_usuario}}" method="post">
+		    <input type="text" id="name" name="name" class="input" required th:value="${usuario.name}">
+		    <input type="text" id="lastName" name="lastName" class="input" required th:value="${usuario.lastName}">
+		    <input type="text" id="dni" name="dni" class="input" required th:value="${usuario.dni}">
+		    <input type="text" id="tlf" name="tlf" class="input" required th:value="${usuario.tlf}">
+		    <input type="email" id="email" name="email" class="input" required th:value="${usuario.email}">
+		    <input type="file" id="foto" name="foto" required th:value="*{usuario.foto}" accept="image/*"  />
+    		<button type="submit" id="btnRegistro" class="form-btn">Generar</button> 
+		</form>
+	</div>	
+
+
+	<div th:if="${not #strings.isEmpty(noAdmin)}">
+	   Acceso Restringido, No tiene permisos
+	</div>
+		<script th:if="${not #strings.isEmpty(error)}">
+		notificacion("¡Error!","Ocurrio un error no esperado, intentelo de nuevo", 'error');
+	</script>
+</body>
+
+</html>
