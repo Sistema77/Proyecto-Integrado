@@ -1,35 +1,43 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css"
-		th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-	<link rel="stylesheet" href="../static/css/estilo.css" th:href="@{/css/estilo.css}">
-	<link rel="stylesheet" href="../static/css/menu.css" th:href="@{/css/menu.css}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script th:src="@{/script/script.js}"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" href="../static/css/estilo.css"
+	th:href="@{/css/estilo.css}">
+<link rel="stylesheet" href="../static/css/menu.css"
+	th:href="@{/css/menu.css}">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+	th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src="@{/script/script.js}"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 
 <body>
 	<nav>
 		<div class="menu">
 			<div class="logo">
-				<a>RoBanck</a>
-				
-				<a> 
-					<img alt class="sizing-normal rounded"  th:if="${foto != null}"
-	                         th:src="'data:image/png;base64, ' + ${foto}" width="130" >
+				<a>RoBanck</a> <a> <img alt class="sizing-normal rounded"
+					th:if="${foto != null}"
+					th:src="'data:image/png;base64, ' + ${foto}" width="130">
 				</a>
-				
+
 			</div>
 			<ul class="nav-links">
-				<li class= "text-center"><span th:text="${nombreUsuario}">usuario</span></li>
-				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/privada/cuenta}">Cuentas</a></li>
-				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/privada/administracion}">Administración</a></li>
+				<li class="text-center"><span th:text="${nombreUsuario}">usuario</span></li>
+				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_USER')"><a
+					th:href="@{/privada/cuenta}">Cuentas</a></li>
+				<li class="mt-3 me-5" sec:authorize="hasRole('ROLE_ADMIN')"><a
+					th:href="@{/privada/administracion}">Administración</a></li>
 				<li>
 					<form th:action="@{/auth/logout}" method="post" id="logoutForm">
 						<button type="submit" class="btn btn-dark mt-2">Logout</button>
@@ -39,27 +47,77 @@
 		</div>
 	</nav>
 
+
+	<div class="contenedor ">
+		<p class="titulo text-center">Simulador Crédito</p>
+		<form class="form" method="POST" th:action="@{'/privada/simulador/generar/' + ${cuenta.id_cuenta}}">
+			<h2>Finalidad del Credito</h2>
+			
+			<div class="form-check d-flex justify-content-evenly">
+				<div class="custom-control custom-radio">
+					<input type="radio" id="Reformas" name="tipoPrestamo" value="Reformas" checked
+						class="form-check-input"> 
+					<label class="form-check-label" for="Reformas">Reformas</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="Coche" name="tipoPrestamo" value="Coche"
+						class="form-check-input"> 
+					<label class="form-check-label" for="Coche">Coche</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="Efic. energética" name="tipoPrestamo" value="Efic. energética"
+						class="form-check-input"> 
+					<label class="form-check-label" for="Efic. energética">Efic. energética</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="Otros" name="tipoPrestamo" value="Otros"
+						class="form-check-input"> 
+					<label class="form-check-label" for="Otros">Otros</label>
+				</div>
+			</div>
+			
+			<h2>Cantidad del Préstamo</h2>
+	        
+	        <div class="d-flex justify-content-end">
+	            <input type="range" class="form-range" min="3000" max="75000" step="100" id="CantidadPrestamo" name="CantidadPrestamo">
+	            <p><output id="value1">3000</output> €</p>
+	        </div>
 	
-	<div class="contenedor form-registro">
-		<p class="titulo">Simulador Credito</p>
-		 <form class="form" th:action="@{'/privada/modificar/usuario/' + ${usuario.id_usuario}}" method="post">
-		    <input type="text" id="name" name="name" class="input" required th:value="${usuario.name}">
-		    <input type="text" id="lastName" name="lastName" class="input" required th:value="${usuario.lastName}">
-		    <input type="text" id="dni" name="dni" class="input" required th:value="${usuario.dni}">
-		    <input type="text" id="tlf" name="tlf" class="input" required th:value="${usuario.tlf}">
-		    <input type="email" id="email" name="email" class="input" required th:value="${usuario.email}">
-		    <input type="file" id="foto" name="foto" required th:value="*{usuario.foto}" accept="image/*"  />
-    		<button type="submit" id="btnRegistro" class="form-btn">Generar</button> 
+	        <h2>Meses a Pagar</h2>
+	        
+	        <div class="d-flex justify-content-end">
+	            <input type="range" class="form-range" min="24" max="96" step="1" id="meses" name="meses">
+	            <p><output id="value2">24</output> meses</p>
+	        </div>
+			
+			<button type="submit" class="btn btn-primary">Simular</button>
 		</form>
-	</div>	
-
-
-	<div th:if="${not #strings.isEmpty(noAdmin)}">
-	   Acceso Restringido, No tiene permisos
 	</div>
-		<script th:if="${not #strings.isEmpty(error)}">
+
+
+
+	<div th:if="${not #strings.isEmpty(noAdmin)}">Acceso Restringido,
+		No tiene permisos</div>
+	<script th:if="${not #strings.isEmpty(error)}">
 		notificacion("¡Error!","Ocurrio un error no esperado, intentelo de nuevo", 'error');
 	</script>
+	<script>
+    // Actualizar valor de la cantidad del préstamo en tiempo real
+    const value1 = document.querySelector("#value1");
+    const input1 = document.querySelector("#CantidadPrestamo");
+    value1.textContent = input1.value;
+    input1.addEventListener("input", (event) => {
+      value1.textContent = event.target.value;
+    });
+
+    // Actualizar valor de los meses en tiempo real
+    const value2 = document.querySelector("#value2");
+    const input2 = document.querySelector("#meses");
+    value2.textContent = input2.value;
+    input2.addEventListener("input", (event) => {
+      value2.textContent = event.target.value;
+    });
+</script>
 </body>
 
 </html>
