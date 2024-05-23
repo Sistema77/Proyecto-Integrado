@@ -1,5 +1,6 @@
-package Proyecto.Java.Final.Controladores;
+/*package Proyecto.Java.Final.Controladores;
 
+import org.hibernate.mapping.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,21 +9,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import Proyecto.Java.Final.DAO.CreditoDAO;
 import Proyecto.Java.Final.DAO.CuentaDAO;
-import Proyecto.Java.Final.DTO.CreditoDTO;
 import Proyecto.Java.Final.DTO.CuentaDTO;
-import Proyecto.Java.Final.Servicios.CreditoToDaoImple;
 import Proyecto.Java.Final.Servicios.CuentaToDtoImple;
 import Proyecto.Java.Final.Servicios.ICreditoServicio;
 import Proyecto.Java.Final.Servicios.ICuentaServicio;
 import Proyecto.Java.Final.Servicios.ICuentaToDto;
+import Proyecto.Java.Final.Servicios.IHistorialServicio;
+import Proyecto.Java.Final.Servicios.IMovimientoCuentaServicio;
+import Proyecto.Java.Final.Servicios.ITransacionServicio;
 import Proyecto.Java.Final.Servicios.IUsuarioServicio;
 
 @Controller
-public class SimuladorControlador {
+public class HistoriaControlador {
+
 	@Autowired
     private IUsuarioServicio usuarioServicio;
 	
@@ -30,20 +31,21 @@ public class SimuladorControlador {
 	private ICuentaServicio cuentaServicio;
 	
 	@Autowired
-	private ICreditoServicio creditoServicio;
+	private IHistorialServicio historialServicio;
 	
-	private static final Logger logger = LoggerFactory.getLogger(SimuladorControlador.class);
+	private static final Logger logger = LoggerFactory.getLogger(HistoriaControlador.class);
 	
-	@GetMapping("/privada/simulador/{id}")
+	@GetMapping("/privada/historial/{id}")
 	public String Simulador(@PathVariable long id,Model model, Authentication authentication) {
 		try {
-			 // Busca la cuenta por ID y lo convierte en un DTO para mostrar en el formulario
+			 // Busca la cuenta por ID
             CuentaDAO cuentaDao = cuentaServicio.buscarCuentaId(id);
-            ICuentaToDto cuentaToDto = new CuentaToDtoImple();
-            CuentaDTO cuentaDto = cuentaToDto.cuentaToDto(cuentaDao);
             
-            model.addAttribute("cuenta", cuentaDto);
-			 // Agrega el nombre de usuario al modelo
+            List<Object> lista = new ArrayList<>();
+            
+            lista = historialServicio.historial(cuentaDao);
+            
+			// Agrega el nombre de usuario al modelo
             model.addAttribute("nombreUsuario", authentication.getName());
             model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
 
@@ -54,20 +56,4 @@ public class SimuladorControlador {
             return "home";
 		}
 	}
-	
-	@PostMapping("/privada/simulador/generar/{id}")
-	public String generar(@PathVariable long id,Model model, Authentication authentication, CreditoDTO credito, int meses) {
-		try {
-			CuentaDAO cuentaDao = cuentaServicio.buscarCuentaId(id);
-	
-			//Guardar Simulación Credito
-			creditoServicio.registrar(credito, id, meses, cuentaDao);
-			
-			model.addAttribute("info", "Simulacion Aceptada");
-			return "home";
-		}catch(Exception e) {
-			logger.error("Error en Simulador: " + e.getMessage(), e);
-            return "home";
-		}
-	}
-}
+}*/

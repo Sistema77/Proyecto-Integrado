@@ -18,7 +18,7 @@ public class CreditoServicioImpl implements ICreditoServicio {
 	@Autowired
 	private CreditoRepositorio creditoRepositorio;
 	
-	private static final Logger logger = LoggerFactory.getLogger(UsuarioServicioImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(CreditoServicioImpl.class);
 	
 	@Override
 	public CreditoDTO registrar(CreditoDTO credito, long id, int meses, CuentaDAO cuenta) {
