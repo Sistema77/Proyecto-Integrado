@@ -51,6 +51,9 @@ public class CuentaDAO {
     @OneToMany(mappedBy="id_Credito")
     private List<CreditoDAO> creditos;
     
+    @OneToMany(mappedBy="id_factura")
+    private List<FacturaDAO> factura;
+    
     // Constructor
     
     public CuentaDAO() {
@@ -124,4 +127,22 @@ public class CuentaDAO {
 	public void setCreditos(List<CreditoDAO> creditos) {
 		this.creditos = creditos;
 	}
+
+	public List<MovimientoCuentaDAO> getMovimientoCuenta() {
+		return movimientoCuenta;
+	}
+
+	public void setMovimientoCuenta(List<MovimientoCuentaDAO> movimientoCuenta) {
+		this.movimientoCuenta = movimientoCuenta;
+	}
+
+	public List<FacturaDAO> getFactura() {
+		return factura;
+	}
+
+	public void setFactura(List<FacturaDAO> factura) {
+		this.factura = factura;
+	}
+	
+	
 }

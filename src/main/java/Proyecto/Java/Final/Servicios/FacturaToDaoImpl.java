@@ -3,6 +3,7 @@ package Proyecto.Java.Final.Servicios;
 import java.util.ArrayList;
 import java.util.List;
 
+import Proyecto.Java.Final.DAO.CuentaDAO;
 import Proyecto.Java.Final.DAO.FacturaDAO;
 import Proyecto.Java.Final.DTO.FacturaDTO;
 
@@ -12,12 +13,16 @@ public class FacturaToDaoImpl implements IFacturaToDao{
 	public FacturaDAO facturaToDao(FacturaDTO facturaDTO) {
 		try {
 			FacturaDAO facturaDao = new FacturaDAO();
+			ICuentaToDao toDao = new CuentaToDaoImple(); 
+			
+			CuentaDAO cuenta = toDao.cuentaToDao(facturaDTO.getCuenta());
 			
 			facturaDao.setCantidadDinero(facturaDTO.getCantidadDinero());
 			facturaDao.setDescripcion(facturaDTO.getDescripcion());
 			facturaDao.setFecha_Hora(facturaDTO.getFecha_Hora());
 			facturaDao.setId_factura(facturaDTO.getId_factura());
 			facturaDao.setTipoFactura(facturaDTO.getTipoFactura());
+			facturaDao.setCuenta(cuenta);
 			
 			return facturaDao;
 		}catch(Exception e) {

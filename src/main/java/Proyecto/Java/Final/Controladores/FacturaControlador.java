@@ -36,12 +36,19 @@ public class FacturaControlador {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FacturaControlador.class);
 	
-	@GetMapping("/privada/factura")
-	public String homefactura( Model model, HttpServletRequest request, Authentication authentication) {
+	@GetMapping("/privada/factura/{id}")
+	public String homefactura(@PathVariable long id, Model model, HttpServletRequest request, Authentication authentication) {
 		try {
-            model.addAttribute("name", authentication.getName());
+            CuentaDAO cuentaDao = cuentaServicio.buscarCuentaId(id);
+            CuentaDTO cuenta = new CuentaDTO();
+            CuentaToDtoImple toDto = new CuentaToDtoImple();
+            
+            cuenta = toDto.cuentaToDto(cuentaDao);
+			
+			model.addAttribute("name", authentication.getName());
             model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
-         
+            model.addAttribute("cuenta", cuenta);
+            
             return "factura";
          
         } catch (Exception e) {
@@ -52,7 +59,7 @@ public class FacturaControlador {
         }
 	}
 	
-	@PostMapping("/privada/factura/{id}")
+	@PostMapping("/privada/factura/pago/{id}")
 	public String pagoFactura(@PathVariable long id, FacturaDTO factura, Model model, Authentication authentication){
 		try {
 			CuentaDAO cuentaDao = cuentaServicio.buscarCuentaId(id);

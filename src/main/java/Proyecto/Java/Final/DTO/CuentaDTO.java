@@ -2,6 +2,8 @@ package Proyecto.Java.Final.DTO;
 
 import java.util.Calendar;
 
+import Proyecto.Java.Final.DAO.UsuarioDAO;
+
 public class CuentaDTO {
 	
     private Long id_cuenta;
@@ -9,6 +11,7 @@ public class CuentaDTO {
     private Double saldo;
     private Calendar fch_apertura;
     private Boolean conNomina;
+    private UsuarioDAO usuario;
 
     
     // Constructor
@@ -59,4 +62,13 @@ public class CuentaDTO {
 		this.conNomina = conNomina;
 	}
 
+	public UsuarioDAO getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioDAO usuario) {
+		this.usuario = usuario;
+	}
+
+	
 }

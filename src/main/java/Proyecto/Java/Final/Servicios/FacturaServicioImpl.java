@@ -13,6 +13,7 @@ import Proyecto.Java.Final.DAO.CuentaDAO;
 import Proyecto.Java.Final.DAO.FacturaDAO;
 import Proyecto.Java.Final.DTO.CuentaDTO;
 import Proyecto.Java.Final.DTO.FacturaDTO;
+import Proyecto.Java.Final.Repositorio.CuentaRepositorio;
 import Proyecto.Java.Final.Repositorio.FacturaRepositorio;
 
 @Service
@@ -24,30 +25,51 @@ public class FacturaServicioImpl implements IFactruraServicio{
 	@Autowired
 	private ICuentaServicio cuentaServicio;
 	
+	@Autowired
+	private CuentaRepositorio cuentaRepositorio;
+	
 	private static final Logger logger = LoggerFactory.getLogger(FacturaServicioImpl.class);
 	
 	@Override
 	public void registrar(CuentaDTO cuenta, FacturaDTO factura) {
 		try {
-			
-			if(cuentaServicio.comprobacionDineroCuenta(cuenta.getNumeroCuenta(), factura.getCantidadDinero())) {
-				// Guardar Factura
-				IFacturaToDao facturaToDao = new FacturaToDaoImpl();
-				FacturaDAO facturaDao = new FacturaDAO();
-				
-				factura.setCuenta(cuenta);
-				factura.setFecha_Hora(Calendar.getInstance());
-				factura.setTipoFactura("Pago");
-				
-				facturaDao =  facturaToDao.facturaToDao(factura);
-				
-				facturaRepositorio.save(facturaDao);
-				
-				// Retirar dinero cuenta
-				cuentaServicio.sacarDineroCuenta(cuenta.getNumeroCuenta(), factura.getCantidadDinero());
-				
-				logger.info("Factura Guardad");
-			}
+			 if (cuentaServicio.comprobacionDineroCuenta(cuenta.getNumeroCuenta(), factura.getCantidadDinero())) {
+	                // Convertir CuentaDTO a CuentaDAO
+	                CuentaDAO cuentaDao = new CuentaDAO();
+	                cuentaDao.setNumeroCuenta(cuenta.getNumeroCuenta());
+	                cuentaDao.setSaldo(cuenta.getSaldo());
+	                cuentaDao.setFch_apertura(cuenta.getFch_apertura());
+	                cuentaDao.setConNomina(cuenta.getConNomina());
+	                // Asumiendo que el usuario ya está configurado en CuentaDTO
+	                cuentaDao.setUsuario(cuenta.getUsuario());
+
+	                // Guardar CuentaDAO si no está ya persistida
+	                if (cuenta.getId_cuenta() == null || !cuentaRepositorio.existsById(cuenta.getId_cuenta())) {
+	                    cuentaDao = cuentaRepositorio.save(cuentaDao);
+	                } else {
+	                    cuentaDao.setId_cuenta(cuenta.getId_cuenta());
+	                }
+
+	                // Convertir FacturaDTO a FacturaDAO
+	                IFacturaToDao facturaToDao = new FacturaToDaoImpl();
+	                FacturaDAO facturaDao = new FacturaDAO();
+	                factura.setCuenta(cuenta);
+	                factura.setFecha_Hora(Calendar.getInstance());
+	                factura.setTipoFactura("Pago");
+
+	                facturaDao = facturaToDao.facturaToDao(factura);
+
+	                // Configurar la CuentaDAO persistida en FacturaDAO
+	                facturaDao.setCuenta(cuentaDao);
+
+	                // Guardar FacturaDAO
+	                facturaRepositorio.save(facturaDao);
+
+	                // Retirar dinero de la cuenta
+	                cuentaServicio.sacarDineroCuenta(cuenta.getNumeroCuenta(), factura.getCantidadDinero());
+
+	                logger.info("Factura Guardada");
+	            }
 		}catch(Exception e) {
 			logger.error("[Error] registrar FacturaServicioImpl: " + e);
 		}

@@ -251,7 +251,7 @@ public class CuentaServicioImpl implements ICuentaServicio{
     		
     		cuenta = cuentaRepositorio.findByNumeroCuenta(numeroCuenta);
     		
-    		if(cuenta != null && dinero > 0) {
+    		if(cuenta != null && dinero > 0.0) {
     			cuenta.setSaldo(cuenta.getSaldo()-dinero);
     			cuentaRepositorio.save(cuenta);
     			return true;
