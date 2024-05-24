@@ -3,8 +3,9 @@ package Proyecto.Java.Final.DTO;
 import java.util.Calendar;
 
 import Proyecto.Java.Final.DAO.CuentaDAO;
+import Proyecto.Java.Final.Util.FechaHoraComparable;
 
-public class TransacionDTO {
+public class TransacionDTO extends FechaHoraComparable{
 	
 	private Long id_trasaciones;
 	private Double cantidadDinero;
@@ -15,7 +16,12 @@ public class TransacionDTO {
 
 
 	public TransacionDTO() {
-	}
+        super(null);
+    }
+
+    public TransacionDTO(Calendar fecha_Hora) {
+        super(fecha_Hora);
+    }
 
 	public Long getId_trasaciones() {
 		return id_trasaciones;

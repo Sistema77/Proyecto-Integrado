@@ -3,8 +3,9 @@ package Proyecto.Java.Final.DTO;
 import java.util.Calendar;
 
 import Proyecto.Java.Final.DAO.CuentaDAO;
+import Proyecto.Java.Final.Util.FechaHoraComparable;
 
-public class MovimientoCuentaDTO {
+public class MovimientoCuentaDTO extends FechaHoraComparable{
   // Atributos
     
     private Long id_movimiento;
@@ -18,7 +19,13 @@ public class MovimientoCuentaDTO {
 
     // Constructor
 
-    public MovimientoCuentaDTO() {}
+	public MovimientoCuentaDTO() {
+        super(null);
+    }
+
+    public MovimientoCuentaDTO(Calendar fecha_Hora) {
+        super(fecha_Hora);
+    }
 
     // Getter / Setter
     

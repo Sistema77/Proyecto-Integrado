@@ -2,7 +2,9 @@ package Proyecto.Java.Final.DTO;
 
 import java.util.Calendar;
 
-public class FacturaDTO {
+import Proyecto.Java.Final.Util.FechaHoraComparable;
+
+public class FacturaDTO extends FechaHoraComparable{
 	   // Atributos
     private Long id_factura;
     private Calendar fecha_Hora;
@@ -12,7 +14,13 @@ public class FacturaDTO {
     private CuentaDTO cuenta;
     
     // Constructor
-    public FacturaDTO() {}
+    public FacturaDTO() {
+        super(null);
+    }
+
+    public FacturaDTO(Calendar fecha_Hora) {
+        super(fecha_Hora);
+    }
 
     // Getter/Setter
 	public Long getId_factura() {
