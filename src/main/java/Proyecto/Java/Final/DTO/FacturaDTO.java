@@ -1,19 +1,15 @@
 package Proyecto.Java.Final.DTO;
 
 import java.util.Calendar;
-
 import Proyecto.Java.Final.Util.FechaHoraComparable;
 
-public class FacturaDTO extends FechaHoraComparable{
-	   // Atributos
+public class FacturaDTO extends FechaHoraComparable {
     private Long id_factura;
-    private Calendar fecha_Hora;
     private Double cantidadDinero;
     private String descripcion;
     private String tipoFactura;
     private CuentaDTO cuenta;
-    
-    // Constructor
+
     public FacturaDTO() {
         super(null);
     }
@@ -22,53 +18,43 @@ public class FacturaDTO extends FechaHoraComparable{
         super(fecha_Hora);
     }
 
-    // Getter/Setter
-	public Long getId_factura() {
-		return id_factura;
-	}
+    public Long getId_factura() {
+        return id_factura;
+    }
 
-	public void setId_factura(Long id_factura) {
-		this.id_factura = id_factura;
-	}
+    public void setId_factura(Long id_factura) {
+        this.id_factura = id_factura;
+    }
 
-	public Calendar getFecha_Hora() {
-		return fecha_Hora;
-	}
+    public Double getCantidadDinero() {
+        return cantidadDinero;
+    }
 
-	public void setFecha_Hora(Calendar fecha_Hora) {
-		this.fecha_Hora = fecha_Hora;
-	}
+    public void setCantidadDinero(Double cantidadDinero) {
+        this.cantidadDinero = cantidadDinero;
+    }
 
-	public Double getCantidadDinero() {
-		return cantidadDinero;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setCantidadDinero(Double cantidadDinero) {
-		this.cantidadDinero = cantidadDinero;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public String getTipoFactura() {
+        return tipoFactura;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public void setTipoFactura(String tipoFactura) {
+        this.tipoFactura = tipoFactura;
+    }
 
-	public String getTipoFactura() {
-		return tipoFactura;
-	}
+    public CuentaDTO getCuenta() {
+        return cuenta;
+    }
 
-	public void setTipoFactura(String tipoFactura) {
-		this.tipoFactura = tipoFactura;
-	}
-
-	public CuentaDTO getCuenta() {
-		return cuenta;
-	}
-
-	public void setCuenta(CuentaDTO cuenta) {
-		this.cuenta = cuenta;
-	}
-
+    public void setCuenta(CuentaDTO cuenta) {
+        this.cuenta = cuenta;
+    }
 }

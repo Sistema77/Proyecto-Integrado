@@ -54,7 +54,7 @@ public class FacturaServicioImpl implements IFactruraServicio{
 	                IFacturaToDao facturaToDao = new FacturaToDaoImpl();
 	                FacturaDAO facturaDao = new FacturaDAO();
 	                factura.setCuenta(cuenta);
-	                factura.setFecha_Hora(Calendar.getInstance());
+	                //factura.setFecha_Hora(Calendar.getInstance());
 	                factura.setTipoFactura("Pago");
 
 	                facturaDao = facturaToDao.facturaToDao(factura);

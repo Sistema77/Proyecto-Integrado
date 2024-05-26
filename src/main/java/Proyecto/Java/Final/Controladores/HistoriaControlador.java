@@ -45,7 +45,7 @@ public class HistoriaControlador {
             model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
             model.addAttribute("historial", lista);  // Añadir la lista al modelo
 
-            return "simulador"; 
+            return "historial"; 
         } catch (Exception e) {
             // Manejo de errores
             logger.error("Error en Simulador: " + e.getMessage(), e);

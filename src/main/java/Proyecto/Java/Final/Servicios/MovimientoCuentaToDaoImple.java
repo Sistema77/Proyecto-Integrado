@@ -20,7 +20,6 @@ public class MovimientoCuentaToDaoImple implements IMovimientoCuentaToDao{
 			
 			movimientoCuentaDao.setCantidad_dinero(movimientoCuentaDto.getCantidad_dinero());
 			movimientoCuentaDao.setCuenta(movimientoCuentaDto.getCuenta());
-			movimientoCuentaDao.setDescripcion(movimientoCuentaDto.getDescripcion());
 			movimientoCuentaDao.setFecha_Hora(movimientoCuentaDto.getFecha_Hora());
 			movimientoCuentaDao.setId_movimiento(movimientoCuentaDto.getId_movimiento());
 			movimientoCuentaDao.setTipo_movimiento(movimientoCuentaDto.getTipo_movimiento());

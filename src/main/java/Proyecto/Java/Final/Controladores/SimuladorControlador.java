@@ -61,8 +61,9 @@ public class SimuladorControlador {
 			CuentaDAO cuentaDao = cuentaServicio.buscarCuentaId(id);
 	
 			//Guardar Simulación Credito
-			creditoServicio.registrar(credito, id, meses, cuentaDao);
+			credito = creditoServicio.registrar(credito, id, meses, cuentaDao);
 			
+			model.addAttribute("credito", credito);
 			model.addAttribute("info", "Simulacion Aceptada");
 			return "home";
 		}catch(Exception e) {

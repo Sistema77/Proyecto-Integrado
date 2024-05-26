@@ -24,9 +24,6 @@ public class MovimientoCuentaDAO {
 		@Column(name = "cantidad_dinero")
 		private Double cantidad_dinero;
 		
-		@Column(name = "descripcion")
-	    private String descripcion;
-		
 		@Column(name = "tipo_movimiento")
 	    private String tipo_movimiento;
 		
@@ -55,14 +52,6 @@ public class MovimientoCuentaDAO {
 
 		public void setCantidad_dinero(Double cantidad_dinero) {
 			this.cantidad_dinero = cantidad_dinero;
-		}
-
-		public String getDescripcion() {
-			return descripcion;
-		}
-
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
 		}
 
 		public String getTipo_movimiento() {

@@ -46,6 +46,10 @@
 		<script th:if="${not #strings.isEmpty(error)}">
 		notificacion("¡Error!","Ocurrio un error no esperado, intentelo de nuevo", 'error');
 	</script>
+		 <script th:if="${not #strings.isEmpty(credito)}">
+        var cuotaMensual = ${cuotaMensual} ;
+        notificacion("Simulación Credito", 'Cantidad a pagar mensual: ' + cuotaMensual, 'info');
+	</script>
 </body>
 
 </html>

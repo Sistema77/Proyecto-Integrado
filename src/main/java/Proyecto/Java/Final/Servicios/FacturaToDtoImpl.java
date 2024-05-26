@@ -11,11 +11,11 @@ public class FacturaToDtoImpl implements IFacturaToDto{
 	@Override
 	public FacturaDTO facturaToDto(FacturaDAO u) {
 		try {
-			FacturaDTO dto = new FacturaDTO();
+			FacturaDTO dto = new FacturaDTO(u.getFecha_Hora());
 			
 			dto.setCantidadDinero(u.getCantidadDinero());
 			dto.setDescripcion(u.getDescripcion());
-			dto.setFecha_Hora(u.getFecha_Hora());
+			//dto.setFecha_Hora(u.getFecha_Hora());
 			dto.setId_factura(u.getId_factura());
 			dto.setTipoFactura(u.getTipoFactura());
 			

@@ -146,7 +146,7 @@ public class MovimientoCuentaControlador {
 
 					//Datos de la MovimientoCuenta
 					trasacion.setTipo_movimiento("Retiro");
-					trasacion.setFecha_Hora(Calendar.getInstance());
+					//trasacion.setFecha_Hora(Calendar.getInstance());
 					trasacion.setCuenta(cuenta);
 					
 					// Guardar Cuenta y el Trasaccion
@@ -180,7 +180,7 @@ public class MovimientoCuentaControlador {
 			if (trasacion.getCantidad_dinero() > 0) {
 
 				CuentaDAO cuenta = new CuentaDAO();
-
+				
 				cuenta = cuentaServicio.buscarCuentaId(id);
 				// Comprobar si la cuenta tiene dinero suficiente
 
@@ -188,7 +188,7 @@ public class MovimientoCuentaControlador {
 
 				// Datos de la MovimientoCuenta
 				trasacion.setTipo_movimiento("Ingreso");
-				trasacion.setFecha_Hora(Calendar.getInstance());
+				//trasacion.setFecha_Hora(Calendar.getInstance());
 				trasacion.setCuenta(cuenta);
 
 				// Guardar Cuenta y el Trasaccion
