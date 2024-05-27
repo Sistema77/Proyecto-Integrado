@@ -39,7 +39,7 @@
 			<div class="card-body" >
 
 				<!--  <h5 class="card-title text-center text-danger" th:if="${not #lists.isEmpty(usuario)}">No hay usuarios registrados</h5>-->
-				<h5 class="card-title text-center text-danger" th:if="${usuario == null}">
+				<h5 class="card-title text-center text-danger" th:if="${#lists.isEmpty(usuarios)}">
 				    No se ha encontrado al usuario
 				</h5>
 				<h4 class="card-title d-flex justify-content-between">

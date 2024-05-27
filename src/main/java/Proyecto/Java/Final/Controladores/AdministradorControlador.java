@@ -133,13 +133,14 @@ public class AdministradorControlador {
             // Verifica si el usuario tiene el rol de administrador
             if(request.isUserInRole("ROLE_ADMIN")) {
                 // Busca al usuario por email
-                UsuarioDTO usuario = usuarioServicio.buscarUsuarioEmail(email);
+                email = email + "%"; // Usa el símbolo de porcentaje para indicar que el correo debe empezar con el texto proporcionado
+                List<UsuarioDTO> usuarios = usuarioServicio.buscarUsuariosPorEmail(email);//////////////
 
-                // Agrega el usuario encontrado al modelo para mostrarlo en la vista
-                model.addAttribute("usuario", usuario);
+                // Agrega los usuarios encontrados al modelo para mostrarlos en la vista
+                model.addAttribute("usuarios", usuarios);
                 
                 model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
-                return "administracion"; // Nombre de la vista donde mostrarás la información del usuario encontrado
+                return "administracion"; // Nombre de la vista donde mostrarás la información de los usuarios encontrados
             } 
             
             // Si el usuario no es administrador, agrega un mensaje de error al modelo y redirige a la página de inicio

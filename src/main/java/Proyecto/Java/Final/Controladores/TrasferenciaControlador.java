@@ -110,7 +110,7 @@ public class TrasferenciaControlador {
 					cuentaServicio.ponerDineroCuenta(cuentaDto.getCuenta_enviada(), cantidadDinero);
 						//Se le suma a la otra Cuenta
 					
-					model.addAttribute("ok", "Operación realizada con exito");
+					model.addAttribute("trasferencia", "Operación realizada con exito");
 					return "home";
 				}
 				model.addAttribute("error", "Error al procesar la solicitud. Por favor, inténtelo de nuevo.");

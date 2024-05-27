@@ -33,5 +33,6 @@ public interface UsuarioRepositorio extends JpaRepository<UsuarioDAO, Long> {
 	
 	public List<UsuarioDAO> findAll();
 	
+	List<UsuarioDAO> findByEmailLike(String email);
 	
 }

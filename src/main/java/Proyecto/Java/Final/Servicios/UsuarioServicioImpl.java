@@ -3,6 +3,7 @@ package Proyecto.Java.Final.Servicios;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -152,6 +153,14 @@ public class UsuarioServicioImpl implements IUsuarioServicio {
             logger.error("Error en buscarUsuarioEmail: " + e.getMessage(), e);
             return null; 
         }
+    }
+    
+    @Override
+    public List<UsuarioDTO> buscarUsuariosPorEmail(String email) {
+        List<UsuarioDAO> usuarios = usuarioRepositorio.findByEmailLike(email);
+        List<UsuarioDTO> usuarioDto = usuarioToDto.listaUsuarioToDto(usuarios);
+        
+        return usuarioDto;
     }
     
     // Método para modificar los detalles de un usuario

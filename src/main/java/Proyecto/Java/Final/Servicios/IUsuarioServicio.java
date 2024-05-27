@@ -45,4 +45,6 @@ public interface IUsuarioServicio {
    
     //Metodo para ver las fotos en las vistas
     public String verFoto(String email);
+    
+    public List<UsuarioDTO> buscarUsuariosPorEmail(String email);
 }

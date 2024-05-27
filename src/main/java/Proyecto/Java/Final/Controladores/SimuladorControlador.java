@@ -65,7 +65,7 @@ public class SimuladorControlador {
 			
 			model.addAttribute("credito", credito);
 			model.addAttribute("info", "Simulacion Aceptada");
-			return "home";
+			return "resultadoCredito";
 		}catch(Exception e) {
 			logger.error("Error en Simulador: " + e.getMessage(), e);
             return "home";

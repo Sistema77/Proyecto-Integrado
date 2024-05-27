@@ -157,7 +157,7 @@ public class MovimientoCuentaControlador {
 					cuentaServicio.guardarCuenta(cuenta); //Guardo la cuenta para evitar errores de persistencia
 					movimientoCuentaServicio.registrar(trasacion2);
 		
-					model.addAttribute("info", "Pago Realizado");
+					model.addAttribute("pagorealizado", "Pago Realizado");
 					return "home";
 				}else {
 					model.addAttribute("error", "Pago No Realizado");
@@ -201,7 +201,7 @@ public class MovimientoCuentaControlador {
 				cuentaServicio.guardarCuenta(cuenta);
 				movimientoCuentaServicio.registrar(trasacion2);
 
-				model.addAttribute("info", "Pago Realizado");
+				model.addAttribute("ingreso", "Pago Realizado");
 				return "home";
 
 			}
