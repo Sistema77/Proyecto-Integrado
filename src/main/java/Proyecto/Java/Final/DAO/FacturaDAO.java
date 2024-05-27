@@ -33,7 +33,7 @@ public class FacturaDAO {
 	private String tipoFactura;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_cuenta")
+	@JoinColumn(name = "cuenta")
 	private CuentaDAO cuenta;
 	
 	// Constructor

@@ -127,11 +127,12 @@ public class CuentaControlador {
 	            // Busca el cuenta por ID
 	        	CuentaDAO cuenta = cuentaServicio.buscarCuentaId(id);
 	            // Obtiene la lista de Cuenta
-	            List<CuentaDAO> cuentas = cuentaServicio.listadoCuentaDAO();
+	            //List<CuentaDAO> cuentas = cuentaServicio.listadoCuentaDAO();
 	            
 	            // Elimina la cuenta y redirige a la página a la lista de cuentas
-	            cuentaServicio.eliminarCuenta(id);
-	            
+	            if(cuenta != null) {
+	            	cuentaServicio.eliminarCuenta(id);
+	            }
 	            return "redirect:/privada/ver-cuenta";
 	        } catch (Exception e) {
 	            // Manejo de errores

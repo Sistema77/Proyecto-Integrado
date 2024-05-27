@@ -39,11 +39,19 @@ public class HistoriaControlador {
             
             List<FechaHoraComparable> lista = historialServicio.historial(cuentaDao);
             
-            model.addAttribute("historial", lista);
+            if (lista == null || lista.isEmpty()) {
+                model.addAttribute("historial", null);
+            } else {
+                model.addAttribute("historial", lista);
+            }
+            
+            //model.addAttribute("historial", lista);
+            
             // Agrega el nombre de usuario al modelo
             model.addAttribute("nombreUsuario", authentication.getName());
             model.addAttribute("foto", usuarioServicio.verFoto(authentication.getName()));
-            model.addAttribute("historial", lista);  // Añadir la lista al modelo
+            // Añadir la lista al modelo
+            //model.addAttribute("historial", lista);  
 
             return "historial"; 
         } catch (Exception e) {

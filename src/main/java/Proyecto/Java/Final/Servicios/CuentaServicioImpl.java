@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import Proyecto.Java.Final.DAO.CuentaDAO;
 import Proyecto.Java.Final.DAO.UsuarioDAO;
 import Proyecto.Java.Final.DTO.CuentaDTO;
-import Proyecto.Java.Final.DTO.UsuarioDTO;
 import Proyecto.Java.Final.Repositorio.CuentaRepositorio;
 import Proyecto.Java.Final.Repositorio.UsuarioRepositorio;
 

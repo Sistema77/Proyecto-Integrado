@@ -51,13 +51,16 @@ public class FacturaServicioImpl implements IFactruraServicio{
 	                }
 
 	                // Convertir FacturaDTO a FacturaDAO
+	                FacturaDTO factura2 = new FacturaDTO(Calendar.getInstance());
 	                IFacturaToDao facturaToDao = new FacturaToDaoImpl();
+	                
 	                FacturaDAO facturaDao = new FacturaDAO();
-	                factura.setCuenta(cuenta);
-	                //factura.setFecha_Hora(Calendar.getInstance());
-	                factura.setTipoFactura("Pago");
+	                factura2.setCuenta(cuenta);
+	                factura2.setCantidadDinero(factura.getCantidadDinero());
+	                factura2.setDescripcion(factura.getDescripcion());
+	                factura2.setTipoFactura("Pago");
 
-	                facturaDao = facturaToDao.facturaToDao(factura);
+	                facturaDao = facturaToDao.facturaToDao(factura2);
 
 	                // Configurar la CuentaDAO persistida en FacturaDAO
 	                facturaDao.setCuenta(cuentaDao);

@@ -17,7 +17,7 @@ public class MovimientoCuentaToDtoImple implements IMovimientoCuentaToDto{
 	public MovimientoCuentaDTO movimientoCuentaDto(MovimientoCuentaDAO u) {
 		try {
             // Crear un nuevo objeto DTO y copiar los atributos al DAO
-			MovimientoCuentaDTO dto = new MovimientoCuentaDTO();
+			MovimientoCuentaDTO dto = new MovimientoCuentaDTO(u.getFecha_Hora());
 			
 			dto.setCantidad_dinero(u.getCantidad_dinero());
 			dto.setCuenta(u.getCuenta());

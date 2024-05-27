@@ -33,22 +33,26 @@ public class HistorialServicioImpl implements IHistorialServicio {
     public List<FechaHoraComparable> historial(CuentaDAO cuenta) {
         try {
             List<FechaHoraComparable> listaHistorial = new ArrayList<>();
-            //List<FacturaDAO> listaFactura = facturaServicio.listaFactura(cuenta);
-            //List<MovimientoCuentaDAO> listaMovimientoCuenta = movimientoCuentaServicio.listaMovimiento(cuenta);
+            List<FacturaDAO> listaFactura = facturaServicio.listaFactura(cuenta);
+            List<MovimientoCuentaDAO> listaMovimientoCuenta = movimientoCuentaServicio.listaMovimiento(cuenta);
             List<TransacionDAO> listaTrasancion = transacionServicio.listaTransaciones(cuenta);
 
-            //IFacturaToDto facturaToDto = new FacturaToDtoImpl();
-            //IMovimientoCuentaToDto movimientoToDto = new MovimientoCuentaToDtoImple();
+            IFacturaToDto facturaToDto = new FacturaToDtoImpl();
+            IMovimientoCuentaToDto movimientoToDto = new MovimientoCuentaToDtoImple();
             ITransacionToDto transacionToDto = new TransacionToDtoImple();
 
-            //List<FacturaDTO> listaFacturaDto = facturaToDto.listaFacturaToDto(listaFactura);
-            //List<MovimientoCuentaDTO> listaMovimientoCuentaDto = movimientoToDto.listaMovimientoCuentaToDto(listaMovimientoCuenta);
+            List<FacturaDTO> listaFacturaDto = facturaToDto.listaFacturaToDto(listaFactura);
+            List<MovimientoCuentaDTO> listaMovimientoCuentaDto = movimientoToDto.listaMovimientoCuentaToDto(listaMovimientoCuenta);
             List<TransacionDTO> listaTrasancionDto = transacionToDto.listaTrasacionDao(listaTrasancion);
 
-            //listaHistorial.addAll(listaFacturaDto);
-            //listaHistorial.addAll(listaMovimientoCuentaDto);
+            listaHistorial.addAll(listaFacturaDto);
+            listaHistorial.addAll(listaMovimientoCuentaDto);
             listaHistorial.addAll(listaTrasancionDto);
 
+            /////////////////////////////////////
+            System.out.println(listaMovimientoCuentaDto.toString());
+            ////////////////////////////////////
+            
             Collections.sort(listaHistorial);
 
             return listaHistorial;

@@ -6,7 +6,7 @@ import Proyecto.Java.Final.Util.FechaHoraComparable;
 
 public class MovimientoCuentaDTO extends FechaHoraComparable {
     private Long id_movimiento;
-    private Double cantidad_dinero;
+    private Double cantidadDinero;
     private String tipo_movimiento;
     private CuentaDAO cuenta;
 
@@ -27,11 +27,11 @@ public class MovimientoCuentaDTO extends FechaHoraComparable {
     }
 
     public Double getCantidad_dinero() {
-        return cantidad_dinero;
+        return cantidadDinero;
     }
 
     public void setCantidad_dinero(Double cantidad_dinero) {
-        this.cantidad_dinero = cantidad_dinero;
+        this.cantidadDinero = cantidad_dinero;
     }
 
     public String getTipo_movimiento() {
@@ -52,7 +52,7 @@ public class MovimientoCuentaDTO extends FechaHoraComparable {
 
     @Override
     public String toString() {
-        return "MovimientoCuentaDTO [id_movimiento=" + id_movimiento + ", cantidad_dinero=" + cantidad_dinero
+        return "MovimientoCuentaDTO [id_movimiento=" + id_movimiento + ", cantidad_dinero=" + cantidadDinero
                 + ", tipo_movimiento=" + tipo_movimiento + ", fecha_Hora=" + fecha_Hora + ", cuenta=" + cuenta + "]";
     }
 }

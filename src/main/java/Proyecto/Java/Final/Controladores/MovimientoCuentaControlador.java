@@ -144,14 +144,18 @@ public class MovimientoCuentaControlador {
 
 					cuentaServicio.sacarDineroCuenta(cuenta.getNumeroCuenta(), trasacion.getCantidad_dinero());
 
+					
+					MovimientoCuentaDTO trasacion2 = new MovimientoCuentaDTO(Calendar.getInstance()); //Creo una variable aux para poder usar el constructor con la fecha
+					
 					//Datos de la MovimientoCuenta
-					trasacion.setTipo_movimiento("Retiro");
+					trasacion2.setCantidad_dinero(trasacion.getCantidad_dinero());
+					trasacion2.setTipo_movimiento("Retiro");
 					//trasacion.setFecha_Hora(Calendar.getInstance());
-					trasacion.setCuenta(cuenta);
+					trasacion2.setCuenta(cuenta);
 					
 					// Guardar Cuenta y el Trasaccion
-					cuentaServicio.guardarCuenta(cuenta);
-					movimientoCuentaServicio.registrar(trasacion);
+					cuentaServicio.guardarCuenta(cuenta); //Guardo la cuenta para evitar errores de persistencia
+					movimientoCuentaServicio.registrar(trasacion2);
 		
 					model.addAttribute("info", "Pago Realizado");
 					return "home";
@@ -186,14 +190,16 @@ public class MovimientoCuentaControlador {
 
 				cuentaServicio.ponerDineroCuenta(cuenta.getNumeroCuenta(), trasacion.getCantidad_dinero());
 
+				MovimientoCuentaDTO trasacion2 = new MovimientoCuentaDTO(Calendar.getInstance());
 				// Datos de la MovimientoCuenta
-				trasacion.setTipo_movimiento("Ingreso");
+				trasacion2.setCantidad_dinero(trasacion.getCantidad_dinero());
+				trasacion2.setTipo_movimiento("Ingreso");
 				//trasacion.setFecha_Hora(Calendar.getInstance());
-				trasacion.setCuenta(cuenta);
+				trasacion2.setCuenta(cuenta);
 
 				// Guardar Cuenta y el Trasaccion
 				cuentaServicio.guardarCuenta(cuenta);
-				movimientoCuentaServicio.registrar(trasacion);
+				movimientoCuentaServicio.registrar(trasacion2);
 
 				model.addAttribute("info", "Pago Realizado");
 				return "home";

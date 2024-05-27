@@ -3,6 +3,7 @@ package Proyecto.Java.Final.DAO;
 import java.util.Calendar;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,16 +43,16 @@ public class CuentaDAO {
     @JoinColumn(name="id_user", referencedColumnName = "id_usuario")
     private UsuarioDAO usuario;
 
-    @OneToMany(mappedBy="id_trasaciones")
+    @OneToMany(mappedBy="cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TransacionDAO> transaciones;
     
-    @OneToMany(mappedBy="id_movimiento")
+    @OneToMany(mappedBy="cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MovimientoCuentaDAO> movimientoCuenta;
 
-    @OneToMany(mappedBy="id_Credito")
+    @OneToMany(mappedBy="cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CreditoDAO> creditos;
     
-    @OneToMany(mappedBy="id_factura")
+    @OneToMany(mappedBy="cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FacturaDAO> factura;
     
     // Constructor
