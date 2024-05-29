@@ -31,7 +31,7 @@
 			</div>
 			<ul class="nav-links">
 				<li>
-					<a th:href="@{/privada/home}">volver</a> 
+					<li><a th:href="@{/privada/ver-cuenta}">volver</a> </li>
 				</li>
 				<li>
 					<form th:action="@{/auth/logout}" method="post" id="logoutForm">
@@ -64,7 +64,7 @@
 					<tbody>
 						<tr th:each="transacion : ${historial}">
 							<td th:text="${#dates.format(transacion.fecha_Hora.time, 'dd/MM/yyyy HH:mm')}">Fecha y Hora</td>
-							<td th:text="${transacion.cantidadDinero}">Cantidad de Dinero</td>
+							<td th:text="${transacion.cantidadDinero} + ' €'">Cantidad de Dinero</td>
 						</tr>
 					</tbody>
 				</table>

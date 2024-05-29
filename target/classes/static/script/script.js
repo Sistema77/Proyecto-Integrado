@@ -17,7 +17,7 @@ function confirmarEliminarCuenta() {
     if (respuesta.toLowerCase() === 'si') { // Usamos toLowerCase para que acepte 'si' en minúsculas o mayúsculas
         Swal.fire({
             title: '¿Estás seguro?',
-            text: 'Estás a punto de eliminar la cuenta con el número ' + numeroCuentaCuentaEliminar,
+            text: 'Estás a punto de eliminar la cuenta con el número ' + numeroCuentaCuentaEliminar + ' Todos los datos asociados tambien se eliminaran',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
