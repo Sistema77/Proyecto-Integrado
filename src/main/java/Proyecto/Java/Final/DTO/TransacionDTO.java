@@ -6,7 +6,6 @@ import Proyecto.Java.Final.Util.FechaHoraComparable;
 
 public class TransacionDTO extends FechaHoraComparable {
     private Long id_trasaciones;
-    private Double cantidadDinero;
     private String descripcion;
     private String cuenta_enviada;
     private CuentaDAO cuenta;

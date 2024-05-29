@@ -5,7 +5,6 @@ import Proyecto.Java.Final.Util.FechaHoraComparable;
 
 public class FacturaDTO extends FechaHoraComparable {
     private Long id_factura;
-    private Double cantidadDinero;
     private String descripcion;
     private String tipoFactura;
     private CuentaDTO cuenta;
