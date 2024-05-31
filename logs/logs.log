@@ -334,3 +334,65 @@ org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property o
 2024-05-30T14:03:15.577+02:00  INFO 6876 --- [RMI TCP Connection(32)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-05-30T14:03:15.579+02:00  INFO 6876 --- [RMI TCP Connection(32)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2024-05-30T14:03:15.586+02:00  INFO 6876 --- [RMI TCP Connection(32)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-05-30T18:56:18.200+02:00  INFO 18384 --- [main] Proyecto.Java.Final.Aplicacion           : Starting Aplicacion using Java 21 with PID 18384 (C:\Users\josem\OneDrive\Escritorio\Proyecto.RoBanck.Java\target\classes started by josem in C:\Users\josem\OneDrive\Escritorio\Proyecto.RoBanck.Java)
+2024-05-30T18:56:18.202+02:00  INFO 18384 --- [main] Proyecto.Java.Final.Aplicacion           : No active profile set, falling back to 1 default profile: "default"
+2024-05-30T18:56:19.298+02:00  INFO 18384 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-30T18:56:19.402+02:00  INFO 18384 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 94 ms. Found 6 JPA repository interfaces.
+2024-05-30T18:56:20.145+02:00  INFO 18384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-30T18:56:20.159+02:00  INFO 18384 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-30T18:56:20.160+02:00  INFO 18384 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-05-30T18:56:20.314+02:00  INFO 18384 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-30T18:56:20.315+02:00  INFO 18384 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1995 ms
+2024-05-30T18:56:20.630+02:00  INFO 18384 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-30T18:56:20.718+02:00  INFO 18384 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-05-30T18:56:20.764+02:00  INFO 18384 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-30T18:56:21.102+02:00  INFO 18384 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-30T18:56:21.145+02:00  INFO 18384 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-30T18:56:21.370+02:00  INFO 18384 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@640a8f93
+2024-05-30T18:56:21.373+02:00  INFO 18384 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-30T18:56:21.417+02:00  WARN 18384 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-05-30T18:56:23.058+02:00  INFO 18384 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-30T18:56:23.231+02:00  INFO 18384 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-30T18:56:24.011+02:00  WARN 18384 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-30T18:56:24.150+02:00  INFO 18384 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-05-30T18:56:24.853+02:00  INFO 18384 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1e9e4468, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5fdff4f1, org.springframework.security.web.context.SecurityContextHolderFilter@1a6df932, org.springframework.security.web.header.HeaderWriterFilter@e0c03bd, org.springframework.web.filter.CorsFilter@117be84a, org.springframework.security.web.csrf.CsrfFilter@28721794, org.springframework.security.web.authentication.logout.LogoutFilter@f3e6876, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3e5febe9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3031d9e9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1415f18d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@140fa482, org.springframework.security.web.access.ExceptionTranslationFilter@373c8f35, org.springframework.security.web.access.intercept.AuthorizationFilter@2e7dd504]
+2024-05-30T18:56:25.244+02:00  INFO 18384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-30T18:56:25.252+02:00  INFO 18384 --- [main] Proyecto.Java.Final.Aplicacion           : Started Aplicacion in 7.674 seconds (process running for 8.46)
+2024-05-30T18:56:32.339+02:00  INFO 18384 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-05-30T18:56:32.349+02:00  INFO 18384 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-30T18:56:32.351+02:00  INFO 18384 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-05-30T18:56:32.360+02:00  INFO 18384 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-05-30T18:56:45.110+02:00  INFO 9952 --- [main] Proyecto.Java.Final.Aplicacion           : Starting Aplicacion using Java 21 with PID 9952 (C:\Users\josem\OneDrive\Escritorio\Proyecto.RoBanck.Java\target\classes started by josem in C:\Users\josem\OneDrive\Escritorio\Proyecto.RoBanck.Java)
+2024-05-30T18:56:45.113+02:00  INFO 9952 --- [main] Proyecto.Java.Final.Aplicacion           : No active profile set, falling back to 1 default profile: "default"
+2024-05-30T18:56:45.988+02:00  INFO 9952 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-30T18:56:46.098+02:00  INFO 9952 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 6 JPA repository interfaces.
+2024-05-30T18:56:46.871+02:00  INFO 9952 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-30T18:56:46.885+02:00  INFO 9952 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-30T18:56:46.885+02:00  INFO 9952 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-05-30T18:56:46.994+02:00  INFO 9952 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-30T18:56:46.994+02:00  INFO 9952 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1828 ms
+2024-05-30T18:56:47.416+02:00  INFO 9952 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-30T18:56:47.507+02:00  INFO 9952 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-05-30T18:56:47.560+02:00  INFO 9952 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-05-30T18:56:47.936+02:00  INFO 9952 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-30T18:56:47.973+02:00  INFO 9952 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-30T18:56:48.196+02:00  INFO 9952 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@42cc420b
+2024-05-30T18:56:48.198+02:00  INFO 9952 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-30T18:56:48.285+02:00  WARN 9952 --- [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-05-30T18:56:49.619+02:00  INFO 9952 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-05-30T18:56:49.774+02:00  INFO 9952 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-30T18:56:50.471+02:00  WARN 9952 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-30T18:56:50.587+02:00  INFO 9952 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-05-30T18:56:51.332+02:00  INFO 9952 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1a6df932, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74120029, org.springframework.security.web.context.SecurityContextHolderFilter@373fb666, org.springframework.security.web.header.HeaderWriterFilter@6195ce27, org.springframework.web.filter.CorsFilter@3031d9e9, org.springframework.security.web.csrf.CsrfFilter@1644cc2d, org.springframework.security.web.authentication.logout.LogoutFilter@d98ce13, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@e0c03bd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1bd53c5c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@38affd02, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1415f18d, org.springframework.security.web.access.ExceptionTranslationFilter@65cf8da0, org.springframework.security.web.access.intercept.AuthorizationFilter@1d86b636]
+2024-05-30T18:56:51.719+02:00  INFO 9952 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-30T18:56:51.728+02:00  INFO 9952 --- [main] Proyecto.Java.Final.Aplicacion           : Started Aplicacion in 7.086 seconds (process running for 7.886)
+2024-05-30T18:57:04.157+02:00  INFO 9952 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-30T18:57:04.158+02:00  INFO 9952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-30T18:57:04.162+02:00  INFO 9952 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-05-30T18:57:04.181+02:00  WARN 9952 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-05-30T18:57:04.191+02:00  WARN 9952 --- [http-nio-8080-exec-1] o.s.w.s.h.HandlerMappingIntrospector     : Cache miss for REQUEST dispatch to '/' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2024-05-30T18:57:26.634+02:00  INFO 9952 --- [http-nio-8080-exec-6] P.J.Final.Servicios.FacturaServicioImpl  : Factura Guardada
+2024-05-30T19:07:20.438+02:00  INFO 9952 --- [RMI TCP Connection(14)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-05-30T19:07:20.449+02:00  INFO 9952 --- [RMI TCP Connection(14)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-30T19:07:20.451+02:00  INFO 9952 --- [RMI TCP Connection(14)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-05-30T19:07:20.458+02:00  INFO 9952 --- [RMI TCP Connection(14)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

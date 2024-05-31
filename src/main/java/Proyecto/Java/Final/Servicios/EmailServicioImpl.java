@@ -32,7 +32,7 @@ public class EmailServicioImpl implements IEmailServicio {
             helper.setSubject("Recuperación de contraseña RoBanck");
 
             // Construcción del enlace de recuperación de contraseña
-            String urlDominio = "http://localhost:8080";
+            String urlDominio = "https://joseguerra.es";
             String urlDeRecuperacion = String.format("%s/auth/recuperar?token=%s", urlDominio, token);
             
             // Construcción del cuerpo del mensaje del correo electrónico
@@ -73,7 +73,7 @@ public class EmailServicioImpl implements IEmailServicio {
             helper.setSubject("Confirmación de cuenta RoBanck");
 
             // Construcción del enlace de confirmación de cuenta
-            String urlDominio = "http://localhost:8080";
+            String urlDominio = "https://joseguerra.es";
             String urlDeConfirmacion = String.format("%s/auth/confirmar-cuenta?token=%s", urlDominio, token);
 
             // Construcción del cuerpo del mensaje del correo electrónico

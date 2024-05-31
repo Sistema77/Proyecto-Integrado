@@ -48,10 +48,6 @@ public class HistorialServicioImpl implements IHistorialServicio {
             listaHistorial.addAll(listaFacturaDto);
             listaHistorial.addAll(listaMovimientoCuentaDto);
             listaHistorial.addAll(listaTrasancionDto);
-
-            /////////////////////////////////////
-            System.out.println(listaMovimientoCuentaDto.toString());
-            ////////////////////////////////////
             
             Collections.sort(listaHistorial);
 
