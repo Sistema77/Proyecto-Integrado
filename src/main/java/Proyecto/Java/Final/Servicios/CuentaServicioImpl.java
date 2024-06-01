@@ -134,12 +134,14 @@ public class CuentaServicioImpl implements ICuentaServicio{
         try {
             // Verificar si la cuenta con el ID proporcionado existe en la base de datos
             CuentaDAO cuenta = cuentaRepositorio.findById(id);
+            long idUser = cuenta.getUsuario().getId_usuario();
+            UsuarioDAO usuario = usuarioRepositorio.findById(idUser);
             boolean yaTieneNomina = false;
             
             if (cuenta != null) {
             	
             	// Compruebo que ninguna cuenta tenga la nomina ya Asingnada
-            	List<CuentaDAO> listaCuenta = cuentaRepositorio.findAll();
+            	List<CuentaDAO> listaCuenta = cuentaRepositorio.findByUsuario(usuario);
             	for(CuentaDAO cuentaComparar : listaCuenta) {
             		if(cuentaComparar.getConNomina()) {
             			if(cuenta.getNumeroCuenta() != cuentaComparar.getNumeroCuenta()) {
